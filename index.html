@@ -24,11 +24,11 @@
 
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#F8F4ED">
+<meta name="theme-color" content="#0E0B07">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
 
 <script type="application/ld+json">
 {
@@ -64,18 +64,20 @@
 
 <style>
 :root {
-  --bg: #F8F4ED;
-  --surface: #FFFFFF;
-  --surface-2: #F1ECE1;
-  --border: #E5DFD2;
-  --text: #1A1A1A;
-  --text-muted: #525252;
-  --text-dim: #8A8580;
-  --accent: #A37719;
-  --accent-bright: #D4A437;
-  --accent-soft: rgba(163, 119, 25, 0.10);
-  --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
-  --max-width: 860px;
+  --bg: #0E0B07;
+  --surface: #16120C;
+  --surface-2: #1B1610;
+  --border: #2A241A;
+  --text: #F2EAD8;
+  --text-muted: #B0A892;
+  --text-dim: #76705F;
+  --accent: #E5B948;
+  --accent-bright: #F5CD5E;
+  --accent-soft: rgba(229, 185, 72, 0.12);
+  --live: #5AC998;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 36px rgba(0,0,0,0.5);
+  --shadow-hover: 0 1px 2px rgba(0,0,0,0.4), 0 20px 48px rgba(0,0,0,0.6);
+  --max-width: 880px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -99,7 +101,7 @@ img { display: block; max-width: 100%; height: auto; }
 
 main { max-width: var(--max-width); margin: 0 auto; padding: 80px 24px 120px; }
 
-header.hero { margin-bottom: 64px; }
+header.hero { margin-bottom: 72px; }
 header.hero .eyebrow {
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -108,24 +110,58 @@ header.hero .eyebrow {
   margin-bottom: 14px;
 }
 header.hero h1 {
-  font-size: clamp(38px, 5.5vw, 56px);
+  font-size: clamp(40px, 6vw, 60px);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
-  margin-bottom: 20px;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  padding-bottom: 4px;
+  background: linear-gradient(180deg, var(--text) 0%, #C4BCA7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 header.hero .tagline {
-  font-size: 19px;
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
   color: var(--text-muted);
   max-width: 60ch;
-  margin-bottom: 28px;
+  padding-bottom: 6px;
 }
-header.hero .about {
-  font-size: 16px;
-  color: var(--text-muted);
-  max-width: 65ch;
+
+.hero-stats {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
 }
-header.hero .about strong { color: var(--text); font-weight: 500; }
+.hero-stats li {
+  padding: 0 18px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.hero-stats li:first-child { padding-left: 0; }
+.hero-stats li:last-child { border-right: none; }
+.hero-stats .stat-value {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 540px) {
+  .hero-stats li { padding: 4px 14px 4px 0; border-right: none; }
+}
 
 .section-label {
   font-size: 11px;
@@ -152,21 +188,33 @@ article.project {
   overflow: hidden;
   margin-bottom: 32px;
   box-shadow: var(--shadow);
-  transition: border-color 0.18s ease, transform 0.18s ease;
+  transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
 }
-article.project:hover { border-color: var(--accent); }
+article.project:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
 article.project .project-image {
   background: #000;
   border-bottom: 1px solid var(--border);
-  aspect-ratio: 1432 / 660;
-  overflow: hidden;
 }
+article.project .project-image figure { margin: 0; }
 article.project .project-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
+  height: auto;
+  display: block;
 }
+article.project .project-image figcaption {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: 13.5px;
+  color: #8F8772;
+  padding: 12px 30px 16px;
+  background: #000;
+  letter-spacing: 0.005em;
+}
+article.project .project-image figure + figure { border-top: 1px solid #1A1814; }
 article.project .project-body { padding: 28px 30px 30px; }
 article.project h2 {
   font-size: 26px;
@@ -185,29 +233,69 @@ article.project .project-meta {
 article.project .pill {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   padding: 3px 10px;
   border-radius: 4px;
   font-size: 11px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
 }
-article.project .pill.live { background: var(--accent-soft); color: var(--accent); }
-article.project .pill.wip  { background: rgba(0, 0, 0, 0.05); color: var(--text-muted); }
+article.project .pill.live {
+  background: rgba(90, 201, 152, 0.10);
+  color: var(--live);
+  border: 1px solid rgba(90, 201, 152, 0.25);
+}
+article.project .pill.wip  { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(90, 201, 152, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
 article.project p {
   color: var(--text-muted);
   margin-bottom: 14px;
 }
-article.project .stack {
-  font-size: 13px;
-  color: var(--text-dim);
-  margin-bottom: 22px;
+
+.source-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
 }
-article.project .stack span { display: inline-block; }
-article.project .stack span + span::before {
-  content: "·";
-  margin: 0 8px;
-  color: var(--border);
+.source-pill {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.025);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.methodology-link {
+  display: inline-block;
+  margin-bottom: 22px;
+  font-size: 14px;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.methodology-link:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
 }
 
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -240,6 +328,19 @@ article.project.wip {
   background: var(--surface-2);
   border-style: dashed;
   box-shadow: none;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 footer {
@@ -276,20 +377,39 @@ footer .links a:hover { color: var(--accent); }
   <p class="tagline">
     Building tools on subjects that interest me.
   </p>
+  <ul class="hero-stats" aria-label="At a glance">
+    <li><span class="stat-value">3,109</span> counties</li>
+    <li><span class="stat-value">4</span> federal data sources</li>
+    <li>Open source · live refresh</li>
+  </ul>
 </header>
 
-<div class="section-label">Featured</div>
+<div class="section-label reveal">Featured</div>
 
-<article class="project">
+<article class="project reveal">
   <div class="project-image">
-    <img src="screenshots/map_exposure.png"
-         alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
+    <figure>
+      <img src="screenshots/map_exposure.png"
+           alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
+      <figcaption>County-level exposure map — uninsured acres weighted by drought severity.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/scatter_drought_gap.png"
+           alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0–5, Y-axis is coverage gap 0–100%. Top-right cluster — high drought, thin coverage — is the watch list.">
+      <figcaption>Drought severity × coverage gap, sized by planted acres — top-right is the watch list.</figcaption>
+    </figure>
   </div>
   <div class="project-body">
     <h2>U.S. Drought Exposure Monitor</h2>
     <div class="project-meta">
-      <span class="pill live">Live</span>
+      <span class="pill live"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
       <span class="mono">drought.mcmillinanalytics.com</span>
+    </div>
+    <div class="source-pills" aria-label="Data sources">
+      <span class="source-pill">USDA NASS</span>
+      <span class="source-pill">RMA SoB</span>
+      <span class="source-pill">U.S. Drought Monitor</span>
+      <span class="source-pill">NOAA CPC</span>
     </div>
     <p>
       A county-level view of where drought severity is colliding with thin
@@ -297,6 +417,7 @@ footer .links a:hover { color: var(--accent); }
       NASS, RMA, the U.S. Drought Monitor, and NOAA's CPC outlook into one
       map and watch list. Refreshes weekly.
     </p>
+    <a class="methodology-link" href="https://github.com/mcmillinanalytics/drought-exposure-tool#readme" rel="noopener">Read the methodology →</a>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
         Launch tool →
@@ -308,9 +429,9 @@ footer .links a:hover { color: var(--accent); }
   </div>
 </article>
 
-<div class="section-label">In progress</div>
+<div class="section-label reveal">In progress</div>
 
-<article class="project wip">
+<article class="project wip reveal">
   <div class="project-body">
     <h2>California Groundwater &amp; Specialty Crops</h2>
     <div class="project-meta">
@@ -340,5 +461,44 @@ footer .links a:hover { color: var(--accent); }
 </footer>
 
 </main>
+
+<script>
+(function () {
+  var reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(function (el, i) {
+    el.style.transitionDelay = (i * 110) + 'ms';
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
+  var refresh = document.getElementById('refresh-text');
+  if (refresh) {
+    fetch('https://api.github.com/repos/mcmillinanalytics/drought-exposure-tool/actions/workflows/refresh-data.yml/runs?status=success&per_page=1', {
+      headers: { 'Accept': 'application/vnd.github+json' }
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var run = data && data.workflow_runs && data.workflow_runs[0];
+        if (!run) return;
+        var d = new Date(run.updated_at);
+        if (isNaN(d.getTime())) return;
+        var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        refresh.textContent = 'Live · refreshed ' + label;
+      })
+      .catch(function () {});
+  }
+})();
+</script>
 </body>
 </html>
