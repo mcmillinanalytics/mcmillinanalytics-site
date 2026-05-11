@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>McMillin Analytics</title>
 
-<meta name="description" content="John McMillin builds tools on subjects that interest him. Featured: U.S. Drought Exposure Monitor — a county-level view of drought severity and federal crop-insurance coverage.">
+<meta name="description" content="John McMillin builds tools on subjects that interest him. Live tools include the U.S. Drought Exposure Monitor and Field Risk Atlas — a SGMA water-risk screening framework for California agricultural land.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="McMillin Analytics">
-<meta property="og:description" content="Building tools on subjects that interest me. Featured: U.S. Drought Exposure Monitor.">
+<meta property="og:description" content="Building tools on subjects that interest me. Live: U.S. Drought Exposure Monitor and Field Risk Atlas.">
 <meta property="og:url" content="https://mcmillinanalytics.com/">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="McMillin Analytics">
-<meta name="twitter:description" content="Building tools on subjects that interest me. Featured: U.S. Drought Exposure Monitor.">
+<meta name="twitter:description" content="Building tools on subjects that interest me. Live: U.S. Drought Exposure Monitor and Field Risk Atlas.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -53,6 +53,24 @@
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
   "description": "County-level dashboard combining USDA NASS planted acres, RMA Summary of Business insured acres, the U.S. Drought Monitor, and NOAA's CPC seasonal outlook to surface where federal crop-insurance coverage is thin in counties currently in drought.",
+  "creator": {
+    "@type": "Person",
+    "name": "John McMillin",
+    "url": "https://mcmillinanalytics.com"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Field Risk Atlas",
+  "url": "https://sgma.mcmillinanalytics.com",
+  "applicationCategory": "DataVisualization",
+  "operatingSystem": "Any (web browser)",
+  "description": "A water-risk screening framework for California agricultural land. Scores every farmable parcel in six San Joaquin Valley and Sonoma counties on water risk, built from public data — basin status under California's Sustainable Groundwater Management Act (SGMA), water-district reliability, dominant crop type, local well depth, and drought exposure. Output is a 0–100 score and a five-band classification anyone can audit.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -195,7 +213,7 @@ article.project:hover {
 }
 article.project .project-image {
   background: #000;
-  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 article.project .project-image figure { margin: 0; }
 article.project .project-image img {
@@ -376,32 +394,59 @@ footer .links a:hover { color: var(--accent); }
     Building tools on subjects that interest me.
   </p>
   <ul class="hero-stats" aria-label="At a glance">
-    <li><span class="stat-value">3,109</span> counties</li>
-    <li><span class="stat-value">4</span> federal data sources</li>
-    <li>Open source · live refresh</li>
+    <li><span class="stat-value">Live</span> tools</li>
+    <li><span class="stat-value">Public</span> data only</li>
+    <li><span class="stat-value">Open</span> source</li>
   </ul>
 </header>
 
-<div class="section-label reveal">Featured</div>
+<div class="section-label reveal">Tools</div>
 
 <article class="project reveal">
+  <div class="project-body">
+    <h2>Field Risk Atlas</h2>
+    <div class="project-meta">
+      <span class="pill live"><span class="live-dot"></span>Live · May 2026 snapshot</span>
+    </div>
+    <div class="source-pills" aria-label="Data sources">
+      <span class="source-pill">DWR</span>
+      <span class="source-pill">USDA</span>
+      <span class="source-pill">U.S. Drought Monitor</span>
+      <span class="source-pill">ASFMRA</span>
+    </div>
+    <p>
+      A water-risk screening framework for California agricultural land. Scores
+      every farmable parcel in six San Joaquin Valley and Sonoma counties on
+      water risk, built from public data &mdash; basin status under
+      California&rsquo;s Sustainable Groundwater Management Act (SGMA),
+      water-district reliability, dominant crop type, local well depth, and
+      drought exposure. Output is a 0&ndash;100 score and a five-band
+      classification anyone can audit.
+    </p>
+    <a class="methodology-link" href="https://sgma.mcmillinanalytics.com/methodology" rel="noopener">Read the methodology →</a>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://sgma.mcmillinanalytics.com" rel="noopener">
+        Launch the atlas →
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/field-risk-atlas" rel="noopener">
+        Source on GitHub →
+      </a>
+    </div>
+  </div>
   <div class="project-image">
     <figure>
-      <img src="screenshots/map_exposure.png"
-           alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
-      <figcaption>County-level exposure map — uninsured acres weighted by drought severity.</figcaption>
-    </figure>
-    <figure>
-      <img src="screenshots/scatter_drought_gap.png"
-           alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0–5, Y-axis is coverage gap 0–100%. Top-right cluster — high drought, thin coverage — is the watch list.">
-      <figcaption>Drought severity × coverage gap, sized by planted acres — top-right is the watch list.</figcaption>
+      <img src="screenshots/field-risk-atlas-kern.png"
+           alt="Kern County, California — agricultural parcels colored by water-risk band. Green parcels in the eastern range, red and ochre across the irrigated valley around Bakersfield. Risk-band legend shown bottom-left.">
+      <figcaption>Kern County parcels colored by water-risk band — five-band classifier across ~300,000 ag parcels statewide.</figcaption>
     </figure>
   </div>
+</article>
+
+<article class="project reveal">
   <div class="project-body">
     <h2>U.S. Drought Exposure Monitor</h2>
     <div class="project-meta">
       <span class="pill live"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
-      <span class="mono">drought.mcmillinanalytics.com</span>
     </div>
     <div class="source-pills" aria-label="Data sources">
       <span class="source-pill">USDA NASS</span>
@@ -418,34 +463,24 @@ footer .links a:hover { color: var(--accent); }
     <a class="methodology-link" href="https://github.com/mcmillinanalytics/drought-exposure-tool#readme" rel="noopener">Read the methodology →</a>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
-        Launch tool →
+        Launch the monitor →
       </a>
       <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">
         Source on GitHub →
       </a>
     </div>
   </div>
-</article>
-
-<div class="section-label reveal">In progress</div>
-
-<article class="project wip reveal">
-  <div class="project-body">
-    <h2>California Groundwater &amp; Specialty Crops</h2>
-    <div class="project-meta">
-      <span class="pill wip">In Progress</span>
-      <span class="mono">SGMA · basin + county</span>
-    </div>
-    <p>
-      Mapping where California's Sustainable Groundwater Management Act is
-      reshaping production for almonds, pistachios, grapes, and leafy greens
-      — which county-level crop mixes are most exposed to pumping curtailments.
-    </p>
-    <div class="cta-row">
-      <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics" rel="noopener">
-        Follow on GitHub →
-      </a>
-    </div>
+  <div class="project-image">
+    <figure>
+      <img src="screenshots/map_exposure.png"
+           alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
+      <figcaption>County-level exposure map — uninsured acres weighted by drought severity.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/scatter_drought_gap.png"
+           alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0–5, Y-axis is coverage gap 0–100%. Top-right cluster — high drought, thin coverage — is the watch list.">
+      <figcaption>Drought severity × coverage gap, sized by planted acres — top-right is the watch list.</figcaption>
+    </figure>
   </div>
 </article>
 
