@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which U.S. Counties Have the Lowest Crop Insurance Coverage in Drought? · U.S. Drought Exposure Monitor</title>
+
+<meta name="description" content="A free, county-level map of where U.S. drought severity is colliding with thin federal crop insurance coverage. Combines USDA NASS planted acres, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC outlook. Refreshed weekly.">
+<meta name="author" content="John McMillin">
+<link rel="canonical" href="https://mcmillinanalytics.com/drought">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Which U.S. counties have the lowest crop insurance coverage in drought?">
+<meta property="og:description" content="A free, county-level dataset combining USDA NASS planted acres, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC outlook. Refreshed weekly.">
+<meta property="og:url" content="https://mcmillinanalytics.com/drought">
+<meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which U.S. counties have the lowest crop insurance coverage in drought?">
+<meta name="twitter:description" content="Free, weekly county-level map of uninsured drought exposure across U.S. row crops.">
+<meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E0B07">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "U.S. Drought Exposure Monitor",
+  "url": "https://drought.mcmillinanalytics.com",
+  "applicationCategory": "DataVisualization",
+  "operatingSystem": "Any (web browser)",
+  "description": "County-level dashboard combining USDA NASS planted acres, RMA Summary of Business insured acres, the U.S. Drought Monitor, and NOAA's CPC seasonal outlook to surface where federal crop-insurance coverage is thin in counties currently in drought.",
+  "creator": {
+    "@type": "Person",
+    "name": "John McMillin",
+    "url": "https://mcmillinanalytics.com"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "McMillin Analytics", "item": "https://mcmillinanalytics.com/" },
+    { "@type": "ListItem", "position": 2, "name": "U.S. Drought Exposure Monitor", "item": "https://mcmillinanalytics.com/drought" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which U.S. counties have the lowest crop insurance coverage and are in drought?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It changes weekly. The U.S. Drought Exposure Monitor identifies them by combining USDA RMA Summary of Business insured-acre data with the U.S. Drought Monitor's current severity map and USDA NASS planted-acre totals. As of the latest refresh, the highest-exposure clusters are typically in the Texas High Plains, the Mississippi Delta, and parts of the Pacific Northwest, where thin federal crop-insurance backstops coincide with active drought."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'coverage gap' on the map?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Coverage gap is the share of a county's planted acres that do not have a federal crop-insurance policy attached. It is calculated as 1 minus (RMA insured acres / NASS planted acres) for the most recent crop year. A coverage gap of 60% means roughly six out of every ten planted acres in that county had no federal insurance policy on file."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What data sources power the U.S. Drought Exposure Monitor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "USDA NASS for planted acres at the county level; USDA RMA Summary of Business for insured acres by county and crop; the U.S. Drought Monitor for current drought severity (D0–D4); and NOAA's Climate Prediction Center for the 90-day Seasonal Drought Outlook. Every source is public and freely available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often is the data refreshed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Drought severity and weather outlooks refresh every Thursday afternoon, a few hours after the U.S. Drought Monitor publishes its weekly map. RMA Summary of Business updates monthly mid-year and again at the close of the crop year. NASS planted-acre estimates promote from March prospective to June acreage to final, automatically, as USDA publishes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the U.S. Drought Exposure Monitor free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool is free to use with no signup, and the full source code, data pipeline, and methodology are open source on GitHub under an open license."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do some U.S. counties have such low federal crop insurance coverage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Federal crop-insurance participation varies by crop, region, and producer. Major row-crop counties in the Corn Belt tend to have high participation because corn and soybean policies are well-established. Coverage thins in counties dominated by specialty crops, mixed operations, or smaller producers, in regions where premiums are high relative to historical losses, and where private alternatives or self-insurance dominate. The Monitor highlights the counties where that thin coverage meets active drought."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0E0B07;
+  --surface: #16120C;
+  --surface-2: #1B1610;
+  --border: #2A241A;
+  --text: #F2EAD8;
+  --text-muted: #B0A892;
+  --text-dim: #76705F;
+  --accent: #E5B948;
+  --accent-bright: #F5CD5E;
+  --accent-soft: rgba(229, 185, 72, 0.12);
+  --live: #5AC998;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 36px rgba(0,0,0,0.5);
+  --shadow-hover: 0 1px 2px rgba(0,0,0,0.4), 0 20px 48px rgba(0,0,0,0.6);
+  --max-width: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.serif, h1, h2, h3 {
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; height: auto; }
+
+main { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 120px; }
+
+nav.breadcrumb {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+nav.breadcrumb a { color: var(--text-muted); }
+nav.breadcrumb a:hover { color: var(--accent); }
+nav.breadcrumb .sep { margin: 0 8px; color: var(--text-dim); }
+
+header.hero { margin-bottom: 56px; }
+header.hero .eyebrow {
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+header.hero .live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: var(--live);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(90, 201, 152, 0.25);
+  background: rgba(90, 201, 152, 0.08);
+}
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(90, 201, 152, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
+header.hero h1 {
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, var(--text) 0%, #C4BCA7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header.hero .lede {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+header.hero .lede strong { color: var(--text); font-weight: 600; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-size: 14.5px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--accent-bright); color: #1A1A1A; }
+.btn-primary:hover { background: var(--accent); color: #fff; }
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+figure.screenshot {
+  margin: 48px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+}
+figure.screenshot img { width: 100%; height: auto; display: block; }
+figure.screenshot figcaption {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #8F8772;
+  padding: 14px 26px 18px;
+  background: #000;
+  letter-spacing: 0.005em;
+}
+
+section.prose { margin: 48px 0; }
+section.prose h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+section.prose h3 {
+  font-size: 18.5px;
+  font-weight: 600;
+  margin: 28px 0 10px;
+  color: var(--text);
+}
+section.prose p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+section.prose p strong { color: var(--text); font-weight: 600; }
+section.prose ul, section.prose ol {
+  color: var(--text-muted);
+  margin: 0 0 18px 22px;
+}
+section.prose li { margin-bottom: 8px; }
+section.prose a { border-bottom: 1px solid rgba(229, 185, 72, 0.4); }
+section.prose a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+.sources-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 8px;
+  font-size: 14.5px;
+}
+.sources-table th, .sources-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.sources-table th {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.sources-table td { color: var(--text-muted); }
+.sources-table td:first-child { color: var(--text); font-weight: 500; }
+.sources-table tr:last-child td { border-bottom: none; }
+
+details.faq {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+}
+details.faq:last-of-type { border-bottom: 1px solid var(--border); }
+details.faq summary {
+  cursor: pointer;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+";
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+details.faq[open] summary::after { content: "−"; }
+details.faq .answer {
+  color: var(--text-muted);
+  margin-top: 14px;
+  line-height: 1.65;
+}
+
+aside.final-cta {
+  margin: 64px 0 0;
+  padding: 36px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+aside.final-cta h2 {
+  font-family: "Source Serif 4", serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+aside.final-cta p { color: var(--text-muted); margin-bottom: 20px; }
+
+footer {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+footer .links { display: flex; gap: 22px; }
+footer .links a { color: var(--text-muted); }
+footer .links a:hover { color: var(--accent); }
+
+@media (max-width: 540px) {
+  main { padding: 36px 18px 80px; }
+  header.hero { margin-bottom: 40px; }
+  figure.screenshot { margin: 32px -18px; border-radius: 0; border-left: none; border-right: none; }
+  aside.final-cta { padding: 28px 22px; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">McMillin Analytics</a>
+  <span class="sep">›</span>
+  <span>U.S. Drought Exposure Monitor</span>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">
+    <span>U.S. Drought Exposure Monitor</span>
+    <span class="live-badge"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
+  </div>
+  <h1>Which U.S. counties have the lowest crop insurance coverage in drought?</h1>
+  <p class="lede">
+    The <strong>U.S. Drought Exposure Monitor</strong> answers this every week. It overlays
+    federal crop-insurance coverage rates from USDA's Risk Management Agency with current
+    drought severity from the U.S. Drought Monitor and NOAA's 90-day outlook — then scores
+    every U.S. county on where the gap between planted acres and insured acres is colliding
+    with active drought. Free, open-source, public-data only.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
+      Launch the monitor →
+    </a>
+    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">
+      Source on GitHub →
+    </a>
+  </div>
+</header>
+
+<figure class="screenshot">
+  <img src="screenshots/map_exposure.png"
+       alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
+  <figcaption>County-level exposure map — uninsured acres weighted by current drought severity. Darker counties are more exposed.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>What this tool answers</h2>
+  <p>
+    Most public dashboards about U.S. drought tell you <em>where it is dry</em>. Most public
+    dashboards about U.S. crop insurance tell you <em>how many acres were insured last year</em>.
+    Neither tells you the question that actually matters to lenders, insurers, ag retailers,
+    commodity traders, and policy analysts: <strong>where are the two stacking up at the
+    same time?</strong>
+  </p>
+  <p>The Monitor was built to answer questions like:</p>
+  <ul>
+    <li>Which U.S. counties have the <strong>lowest federal crop insurance coverage</strong> right now, and how many of them are currently in drought?</li>
+    <li>Where is the <strong>coverage gap</strong> — uninsured planted acres — concentrated for corn, soybeans, wheat, cotton, sorghum, and rice?</li>
+    <li>Which counties' growing seasons are forecast to <strong>worsen</strong> under NOAA's 90-day Seasonal Drought Outlook?</li>
+    <li>How does <strong>this week's</strong> drought map compare to the same week last year?</li>
+  </ul>
+</section>
+
+<section class="prose">
+  <h2>How exposure is calculated</h2>
+  <p>Each county gets one composite score, built in three steps:</p>
+  <ol>
+    <li><strong>Planted acres.</strong> USDA NASS publishes planted acres by county and crop. For the current year, the tool walks a three-tier waterfall — county-level actuals when available, otherwise state-level scaled by the county's three-year share, otherwise the most recent prior year — so every county has a defensible acreage number.</li>
+    <li><strong>Insured acres.</strong> RMA's Summary of Business reports federal crop-insurance policies by county, crop, and coverage type. Dividing insured acres by planted acres yields a <strong>coverage rate</strong>. One minus the coverage rate is the <strong>coverage gap</strong> — the share of planted acres with no federal policy attached.</li>
+    <li><strong>Drought severity.</strong> The U.S. Drought Monitor publishes a five-band severity map every Thursday morning. The tool reads each county's worst current band (D0 through D4) and multiplies it against the coverage gap and planted-acre weight to produce a single county-level <strong>exposure score</strong>.</li>
+  </ol>
+  <p>
+    The result is a single number per county that captures all three forces at once. The
+    map and watch list rank from highest to lowest exposure, and the scatter view below
+    surfaces the top-right cluster — counties with both thin coverage <em>and</em> deep
+    drought, sized by how many acres are actually on the line.
+  </p>
+</section>
+
+<figure class="screenshot">
+  <img src="screenshots/scatter_drought_gap.png"
+       alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0 to 5, Y-axis is coverage gap 0 to 100 percent. The top-right cluster represents the highest-exposure counties.">
+  <figcaption>Drought severity × coverage gap, sized by planted acres. Top-right is the watch list.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>Data sources</h2>
+  <p>Every input is public, freely available, and refreshed on a known cadence:</p>
+  <table class="sources-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>What it provides</th>
+        <th>Refresh</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>USDA NASS</td>
+        <td>Planted acres by county and crop (corn, soy, wheat, cotton, sorghum, rice)</td>
+        <td>Annual + intra-year revisions</td>
+      </tr>
+      <tr>
+        <td>USDA RMA Summary of Business</td>
+        <td>Federally insured acres by county, crop, and coverage type</td>
+        <td>Monthly mid-year + crop-year close</td>
+      </tr>
+      <tr>
+        <td>U.S. Drought Monitor</td>
+        <td>Current drought severity (D0–D4) by county</td>
+        <td>Weekly, Thursdays</td>
+      </tr>
+      <tr>
+        <td>NOAA CPC Seasonal Drought Outlook</td>
+        <td>90-day forward outlook — development, persistence, improvement, removal</td>
+        <td>Monthly</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose">
+  <h2>Methodology in plain English</h2>
+  <p>
+    Federal crop insurance is the largest farm-safety-net program in the United States,
+    but participation is uneven. Major Corn Belt counties have near-universal participation
+    in corn and soybean policies; specialty-crop counties, mixed-operation regions, and
+    parts of the country with low historical loss ratios often run much thinner. When a
+    drought lands on a thinly insured county, the resulting losses fall harder on
+    producers, ag lenders, suppliers, and regional buyers because there is less federal
+    backstop in the system.
+  </p>
+  <p>
+    The Monitor surfaces those counties by reporting three numbers together — planted
+    acres, coverage gap, and drought severity — instead of one at a time. The
+    methodology, every transformation, every join key, and every weighting decision is
+    open-source on <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
+    The tool ships with a complete data pipeline and pre-built parquet caches; anyone can
+    rebuild it from scratch.
+  </p>
+  <p>
+    A short methodology note also lives in the project <a href="https://github.com/mcmillinanalytics/drought-exposure-tool#readme" rel="noopener">README</a>,
+    including the three-tier acreage waterfall, the wheat-class handling, and the known
+    quirks of RMA's Summary of Business schema.
+  </p>
+</section>
+
+<section class="prose" id="faq">
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq">
+    <summary>What is "coverage gap" on the map?</summary>
+    <p class="answer">
+      Coverage gap is the share of a county's planted acres that do <em>not</em> have a
+      federal crop-insurance policy attached. It is calculated as 1 − (RMA insured acres
+      ÷ NASS planted acres) for the most recent crop year. A coverage gap of 60% means
+      roughly six out of every ten planted acres in that county had no federal policy on
+      file.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Why do some U.S. counties have such low federal crop insurance coverage?</summary>
+    <p class="answer">
+      Participation varies by crop, region, and producer. Major Corn Belt counties tend
+      to be near-universal on corn and soybean policies. Coverage thins in counties
+      dominated by specialty crops, in regions where premiums are high relative to
+      historical losses, and where private alternatives or self-insurance dominate. The
+      Monitor highlights the counties where that thin coverage meets active drought.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>How often is the data refreshed?</summary>
+    <p class="answer">
+      Drought severity and the seasonal outlook refresh every Thursday afternoon, a few
+      hours after the U.S. Drought Monitor publishes. RMA Summary of Business updates
+      monthly mid-year and again at the close of the crop year. NASS planted-acre
+      estimates promote from March prospective to June acreage to final, automatically,
+      as USDA publishes.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Is the U.S. Drought Exposure Monitor free?</summary>
+    <p class="answer">
+      Yes. The tool is free to use with no signup, and the full source code, data
+      pipeline, and methodology are open source on
+      <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Which crops are covered?</summary>
+    <p class="answer">
+      The major federally insured row crops: corn, soybeans, wheat (excluding durum, which
+      NASS does not publish at the county level under that series), cotton, sorghum, and
+      rice. These crops cover the bulk of insured U.S. acres.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Can I use the underlying data for my own analysis?</summary>
+    <p class="answer">
+      Yes. Every source is public USDA, NOAA, or U.S. Drought Monitor data. The repository
+      contains the pre-built parquet caches and the full pipeline that produced them, so
+      you can either pull the parquets directly or re-run the pipeline against the
+      upstream APIs. Attribution to the original federal sources is appreciated.
+    </p>
+  </details>
+</section>
+
+<aside class="final-cta">
+  <h2>Open the live tool</h2>
+  <p>
+    Pick a crop, pick a state, and the watch list reorders to show which counties are
+    most exposed this week.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
+      Launch the monitor →
+    </a>
+    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">
+      Source on GitHub →
+    </a>
+  </div>
+</aside>
+
+<footer>
+  <div>© 2026 McMillin Analytics · John McMillin</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="https://github.com/mcmillinanalytics" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/johnmcmillin/" rel="noopener">LinkedIn</a>
+    <a href="mailto:mcmillinanalytics@gmail.com">Email</a>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function () {
+  var refresh = document.getElementById('refresh-text');
+  if (!refresh) return;
+  fetch('https://api.github.com/repos/mcmillinanalytics/drought-exposure-tool/actions/workflows/refresh-data.yml/runs?status=success&per_page=1', {
+    headers: { 'Accept': 'application/vnd.github+json' }
+  })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var run = data && data.workflow_runs && data.workflow_runs[0];
+      if (!run) return;
+      var d = new Date(run.updated_at);
+      if (isNaN(d.getTime())) return;
+      var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      refresh.textContent = 'Live · refreshed ' + label;
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>

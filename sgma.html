@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which California Ag Parcels Are Most Exposed to SGMA Water Restrictions? · Field Risk Atlas</title>
+
+<meta name="description" content="A free, parcel-level water-risk map for California agricultural land. Scores every farmable parcel in nine San Joaquin Valley and Sonoma counties on SGMA basin status, water-district reliability, crop type, well depth, and drought exposure.">
+<meta name="author" content="John McMillin">
+<link rel="canonical" href="https://mcmillinanalytics.com/sgma">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Which California ag parcels are most exposed to SGMA water restrictions?">
+<meta property="og:description" content="A parcel-level water-risk framework for California agricultural land. Built from public DWR, USDA, U.S. Drought Monitor, and ASFMRA data.">
+<meta property="og:url" content="https://mcmillinanalytics.com/sgma">
+<meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which California ag parcels are most exposed to SGMA water restrictions?">
+<meta name="twitter:description" content="Parcel-level water-risk map for California agricultural land across nine counties.">
+<meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E0B07">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Field Risk Atlas",
+  "url": "https://sgma.mcmillinanalytics.com",
+  "applicationCategory": "DataVisualization",
+  "operatingSystem": "Any (web browser)",
+  "description": "A water-risk framework for California agricultural land. Scores every farmable parcel in nine San Joaquin Valley and Sonoma counties on water risk, built from public data — basin status under California's Sustainable Groundwater Management Act (SGMA), water-district reliability, dominant crop type, local well depth, and drought exposure. Output is a 0–100 score and a five-band classification anyone can audit.",
+  "creator": {
+    "@type": "Person",
+    "name": "John McMillin",
+    "url": "https://mcmillinanalytics.com"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "McMillin Analytics", "item": "https://mcmillinanalytics.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Field Risk Atlas", "item": "https://mcmillinanalytics.com/sgma" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is SGMA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SGMA is the Sustainable Groundwater Management Act, a 2014 California law that requires local agencies to bring high- and medium-priority groundwater subbasins into long-term balance. Each subbasin's Groundwater Sustainability Agency (GSA) must adopt and implement a Groundwater Sustainability Plan (GSP) that the California Department of Water Resources (DWR) reviews and approves. In overdrafted basins, that almost always means pumping restrictions, allocation cuts, or fees on agricultural groundwater use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which California counties does the Field Risk Atlas cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nine counties: the eight San Joaquin Valley counties — San Joaquin, Stanislaus, Merced, Madera, Fresno, Kings, Tulare, and Kern — plus Sonoma. Together they contain roughly 375,000 farmable parcels and the bulk of California's perennial-crop acreage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a parcel's water-risk score mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each parcel gets a 0–100 score that combines five public inputs: SGMA basin status, water-district reliability, dominant crop class, local well depth, and drought exposure. Scores roll up into a five-band classification — Severe, High, Moderate, Watch, Low — so a non-specialist can read the map without needing to interpret the underlying weights."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which crops are most exposed to SGMA pumping restrictions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Perennial, high-water crops in critical-overdraft subbasins carry the most exposure: almonds, pistachios, walnuts, and grapes. They cannot be fallowed in response to a dry year the way an annual row crop can — the trees are a 25-year capital investment. Specialty vegetables and leafy greens are also exposed where they rely on heavily pumped groundwater."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Field Risk Atlas free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool is free to use with no signup, and the methodology, data sources, and scoring logic are documented openly. Every input is public — DWR, USDA, U.S. Drought Monitor, and ASFMRA — and there is no proprietary data behind the score."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often does the data refresh?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Field Risk Atlas ships as a snapshot, currently May 2026. SGMA inputs move on long cycles — Groundwater Sustainability Plans are reviewed and amended on multi-year schedules, and water-district reliability changes year over year — so a snapshot cadence is appropriate to the underlying data. The drought-exposure input is refreshed at each snapshot release."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0E0B07;
+  --surface: #16120C;
+  --surface-2: #1B1610;
+  --border: #2A241A;
+  --text: #F2EAD8;
+  --text-muted: #B0A892;
+  --text-dim: #76705F;
+  --accent: #E5B948;
+  --accent-bright: #F5CD5E;
+  --accent-soft: rgba(229, 185, 72, 0.12);
+  --live: #5AC998;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 36px rgba(0,0,0,0.5);
+  --shadow-hover: 0 1px 2px rgba(0,0,0,0.4), 0 20px 48px rgba(0,0,0,0.6);
+  --max-width: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.serif, h1, h2, h3 {
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; height: auto; }
+
+main { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 120px; }
+
+nav.breadcrumb {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+nav.breadcrumb a { color: var(--text-muted); }
+nav.breadcrumb a:hover { color: var(--accent); }
+nav.breadcrumb .sep { margin: 0 8px; color: var(--text-dim); }
+
+header.hero { margin-bottom: 56px; }
+header.hero .eyebrow {
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+header.hero .live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: var(--live);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(90, 201, 152, 0.25);
+  background: rgba(90, 201, 152, 0.08);
+}
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(90, 201, 152, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
+header.hero h1 {
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, var(--text) 0%, #C4BCA7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header.hero .lede {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+header.hero .lede strong { color: var(--text); font-weight: 600; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-size: 14.5px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--accent-bright); color: #1A1A1A; }
+.btn-primary:hover { background: var(--accent); color: #fff; }
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+figure.screenshot {
+  margin: 48px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+}
+figure.screenshot img { width: 100%; height: auto; display: block; }
+figure.screenshot figcaption {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #8F8772;
+  padding: 14px 26px 18px;
+  background: #000;
+  letter-spacing: 0.005em;
+}
+
+section.prose { margin: 48px 0; }
+section.prose h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+section.prose h3 {
+  font-size: 18.5px;
+  font-weight: 600;
+  margin: 28px 0 10px;
+  color: var(--text);
+}
+section.prose p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+section.prose p strong { color: var(--text); font-weight: 600; }
+section.prose ul, section.prose ol {
+  color: var(--text-muted);
+  margin: 0 0 18px 22px;
+}
+section.prose li { margin-bottom: 8px; }
+section.prose a { border-bottom: 1px solid rgba(229, 185, 72, 0.4); }
+section.prose a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+.sources-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 8px;
+  font-size: 14.5px;
+}
+.sources-table th, .sources-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.sources-table th {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.sources-table td { color: var(--text-muted); }
+.sources-table td:first-child { color: var(--text); font-weight: 500; }
+.sources-table tr:last-child td { border-bottom: none; }
+
+.band-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 8px;
+  font-size: 14.5px;
+}
+.band-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-muted);
+}
+.band-table tr:last-child td { border-bottom: none; }
+.band-table .band-name {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  width: 110px;
+  white-space: nowrap;
+}
+.band-table .band-range {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  width: 72px;
+}
+.band-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.band-severe   { background: #D9534F; }
+.band-high     { background: #E5945C; }
+.band-moderate { background: #E5C25C; }
+.band-watch    { background: #9FB87A; }
+.band-low      { background: #5AC998; }
+
+details.faq {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+}
+details.faq:last-of-type { border-bottom: 1px solid var(--border); }
+details.faq summary {
+  cursor: pointer;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+";
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+details.faq[open] summary::after { content: "−"; }
+details.faq .answer {
+  color: var(--text-muted);
+  margin-top: 14px;
+  line-height: 1.65;
+}
+
+aside.final-cta {
+  margin: 64px 0 0;
+  padding: 36px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+aside.final-cta h2 {
+  font-family: "Source Serif 4", serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+aside.final-cta p { color: var(--text-muted); margin-bottom: 20px; }
+
+footer {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+footer .links { display: flex; gap: 22px; }
+footer .links a { color: var(--text-muted); }
+footer .links a:hover { color: var(--accent); }
+
+@media (max-width: 540px) {
+  main { padding: 36px 18px 80px; }
+  header.hero { margin-bottom: 40px; }
+  figure.screenshot { margin: 32px -18px; border-radius: 0; border-left: none; border-right: none; }
+  aside.final-cta { padding: 28px 22px; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">McMillin Analytics</a>
+  <span class="sep">›</span>
+  <span>Field Risk Atlas</span>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">
+    <span>Field Risk Atlas</span>
+    <span class="live-badge"><span class="live-dot"></span>Live · May 2026 snapshot</span>
+  </div>
+  <h1>Which California ag parcels are most exposed to SGMA water restrictions?</h1>
+  <p class="lede">
+    <strong>Field Risk Atlas</strong> scores every farmable parcel in nine California
+    counties — the San Joaquin Valley plus Sonoma — on water risk under the Sustainable
+    Groundwater Management Act. Each parcel gets a 0&ndash;100 score and a five-band
+    classification built from public DWR, USDA, U.S. Drought Monitor, and ASFMRA data.
+    Free, open-methodology, parcel-level.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://sgma.mcmillinanalytics.com" rel="noopener">
+      Launch the atlas →
+    </a>
+    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/field-risk-atlas" rel="noopener">
+      Source on GitHub →
+    </a>
+  </div>
+</header>
+
+<figure class="screenshot">
+  <img src="screenshots/field-risk-atlas-parcel-detail.png"
+       alt="Field Risk Atlas — nine California counties from Sonoma through the San Joaquin Valley, with agricultural parcels colored by water-risk band. A Tulare County pistachio parcel is selected, opening a side panel that reports a Severe risk band along with subbasin, GSP status, water-tier reliability, crop class, well depth, and 52-week drought exposure.">
+  <figcaption>Click any parcel to see why — subbasin, GSP status, water-district tier, well depth, and drought exposure resolve into a single risk band.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>What this tool answers</h2>
+  <p>
+    Most public reporting on California water tells you what is happening in a basin or
+    a district. The Field Risk Atlas works in the opposite direction: it starts from the
+    parcel — the unit of ownership, lending, and underwriting — and asks what every
+    public water-risk signal says about <em>this specific field</em>.
+  </p>
+  <p>The atlas was built to answer questions like:</p>
+  <ul>
+    <li>Which California ag parcels carry the <strong>highest water risk</strong> under SGMA?</li>
+    <li>Which subbasins are flagged as <strong>critical overdraft</strong> by DWR, and how do their GSPs stack up?</li>
+    <li>Where do <strong>perennial high-water crops</strong> — almonds, pistachios, walnuts, grapes — sit on top of the most stressed groundwater?</li>
+    <li>How does <strong>water-district reliability</strong> vary across the San Joaquin Valley?</li>
+    <li>How does <strong>drought exposure</strong> compound the underlying SGMA risk?</li>
+  </ul>
+</section>
+
+<section class="prose">
+  <h2>How the water-risk score is calculated</h2>
+  <p>Each parcel's 0–100 score combines five inputs:</p>
+  <ol>
+    <li><strong>SGMA basin status.</strong> DWR's basin prioritization and the status of the subbasin's Groundwater Sustainability Plan — critical overdraft basins with weak or unapproved GSPs score worst.</li>
+    <li><strong>Water-district reliability.</strong> The parcel's surface-water-district allocation history. Districts with deep historical cutbacks shift more burden onto groundwater, which compounds SGMA exposure.</li>
+    <li><strong>Dominant crop class.</strong> Perennial high-water crops (tree nuts, vines) cannot be fallowed in a dry year the way annuals can, so they carry higher risk in stressed basins.</li>
+    <li><strong>Local well depth.</strong> A proxy for aquifer health and pumping cost. Deeper wells in the area signal more drawdown and higher operating cost going forward.</li>
+    <li><strong>Drought exposure.</strong> Recent U.S. Drought Monitor history at the parcel's county, which acts as a near-term stressor on top of the structural SGMA picture.</li>
+  </ol>
+  <p>
+    Inputs are normalized to a common 0–100 scale, weighted, and summed into the final
+    parcel score. The result is binned into five bands so a non-specialist can read the
+    map without needing to interpret the underlying weights:
+  </p>
+  <table class="band-table">
+    <tbody>
+      <tr><td class="band-name"><span class="band-swatch band-severe"></span>Severe</td>   <td class="band-range">80–100</td><td>Worst-case stack — critical-overdraft basin, perennial high-water crop, weak water-district tier, drought.</td></tr>
+      <tr><td class="band-name"><span class="band-swatch band-high"></span>High</td>       <td class="band-range">60–80</td> <td>Multiple stressors aligned. Active SGMA pressure expected.</td></tr>
+      <tr><td class="band-name"><span class="band-swatch band-moderate"></span>Moderate</td><td class="band-range">40–60</td> <td>One or two material stressors. Worth monitoring across SGMA implementation milestones.</td></tr>
+      <tr><td class="band-name"><span class="band-swatch band-watch"></span>Watch</td>     <td class="band-range">20–40</td> <td>Some risk in the stack but largely insulated by surface-water reliability or basin status.</td></tr>
+      <tr><td class="band-name"><span class="band-swatch band-low"></span>Low</td>         <td class="band-range">0–20</td>  <td>Healthy basin, reliable district, low-water crop, shallow stable wells.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose">
+  <h2>Data sources</h2>
+  <p>Every input is public and freely available:</p>
+  <table class="sources-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>What it provides</th>
+        <th>Cadence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>California DWR</td>
+        <td>SGMA basin prioritization, GSP status, subbasin boundaries, well-depth data</td>
+        <td>Multi-year review cycle</td>
+      </tr>
+      <tr>
+        <td>USDA</td>
+        <td>Crop class and farmable-land coverage at the parcel level</td>
+        <td>Annual</td>
+      </tr>
+      <tr>
+        <td>U.S. Drought Monitor</td>
+        <td>County-level drought severity history</td>
+        <td>Weekly</td>
+      </tr>
+      <tr>
+        <td>ASFMRA</td>
+        <td>Land-use and ag-land reference data informing classification</td>
+        <td>Periodic</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose">
+  <h2>Why parcel-level matters for SGMA</h2>
+  <p>
+    SGMA is implemented at the subbasin level, but the consequences land at the parcel
+    level — on individual landowners, lenders, insurers, and crop buyers. Two parcels in
+    the same subbasin can face very different risk profiles depending on the water
+    district that serves them, the crop they grow, and the depth of nearby wells. A
+    basin-level map averages those differences away. The Field Risk Atlas keeps them.
+  </p>
+  <p>
+    The cover is the nine counties that together contain most of California's
+    SGMA-exposed perennial acreage: <strong>San Joaquin, Stanislaus, Merced, Madera,
+    Fresno, Kings, Tulare, Kern</strong> across the San Joaquin Valley, plus
+    <strong>Sonoma</strong>. That's roughly 375,000 farmable parcels, every one of them
+    scored.
+  </p>
+  <p>
+    The full methodology, including each input's weight, every data join, and the
+    band-cutoff logic, is documented at
+    <a href="https://sgma.mcmillinanalytics.com/methodology" rel="noopener">sgma.mcmillinanalytics.com/methodology</a>
+    and in the
+    <a href="https://github.com/mcmillinanalytics/field-risk-atlas" rel="noopener">project repository</a>.
+  </p>
+</section>
+
+<section class="prose" id="faq">
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq">
+    <summary>What is SGMA?</summary>
+    <p class="answer">
+      SGMA is California's Sustainable Groundwater Management Act, passed in 2014. It
+      requires local agencies in high- and medium-priority groundwater subbasins to
+      adopt Groundwater Sustainability Plans (GSPs) and bring those basins into
+      long-term balance. In overdrafted basins, that almost always means pumping
+      restrictions, allocation cuts, or fees on agricultural groundwater use.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Which California counties does this cover?</summary>
+    <p class="answer">
+      Nine counties: San Joaquin, Stanislaus, Merced, Madera, Fresno, Kings, Tulare,
+      and Kern across the San Joaquin Valley, plus Sonoma. Together they contain roughly
+      375,000 farmable parcels.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Which crops are most exposed to SGMA pumping restrictions?</summary>
+    <p class="answer">
+      Perennial, high-water crops in critical-overdraft subbasins carry the most
+      exposure: almonds, pistachios, walnuts, and grapes. They cannot be fallowed in
+      response to a dry year — the trees are a 25-year capital investment. Specialty
+      vegetables and leafy greens are also exposed where they rely on heavily pumped
+      groundwater.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>What does "Severe" mean in the band classification?</summary>
+    <p class="answer">
+      Severe is the highest of the five bands and corresponds to scores of 80 and above.
+      It typically signals a parcel where multiple stressors are stacked: a
+      critical-overdraft subbasin, a perennial high-water crop, a low-reliability water
+      district, and recent drought exposure.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Is the Field Risk Atlas free?</summary>
+    <p class="answer">
+      Yes. The tool is free to use with no signup, and the methodology, data sources,
+      and scoring logic are documented openly on
+      <a href="https://github.com/mcmillinanalytics/field-risk-atlas" rel="noopener">GitHub</a>.
+      Every input is public.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>How often does the data refresh?</summary>
+    <p class="answer">
+      The atlas ships as a snapshot, currently May 2026. SGMA inputs move on long
+      cycles — GSPs are reviewed and amended on multi-year schedules, and
+      water-district reliability changes year over year — so a snapshot cadence is
+      appropriate to the underlying data. The drought-exposure input is refreshed at
+      each snapshot release.
+    </p>
+  </details>
+</section>
+
+<aside class="final-cta">
+  <h2>Open the live atlas</h2>
+  <p>
+    Pan to any county, click any parcel, and the side panel reports the full water-risk
+    breakdown — subbasin, GSP status, water-district tier, crop class, well depth, and
+    52-week drought exposure.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://sgma.mcmillinanalytics.com" rel="noopener">
+      Launch the atlas →
+    </a>
+    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/field-risk-atlas" rel="noopener">
+      Source on GitHub →
+    </a>
+  </div>
+</aside>
+
+<footer>
+  <div>© 2026 McMillin Analytics · John McMillin</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="https://github.com/mcmillinanalytics" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/johnmcmillin/" rel="noopener">LinkedIn</a>
+    <a href="mailto:mcmillinanalytics@gmail.com">Email</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
