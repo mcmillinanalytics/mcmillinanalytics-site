@@ -101,7 +101,7 @@
       "name": "Is the U.S. Drought Exposure Monitor free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The tool is free to use with no signup, and the full source code, data pipeline, and methodology are open source on GitHub under an open license."
+        "text": "Yes. The tool is free to use with no signup, and the full source code and methodology are open source on GitHub under an open license."
       }
     },
     {
@@ -432,16 +432,13 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>What this tool answers</h2>
   <p>
-    Most public dashboards about U.S. drought tell you <em>where it is dry</em>. Most public
-    dashboards about U.S. crop insurance tell you <em>how many acres were insured last year</em>.
-    Neither tells you the question that actually matters to lenders, insurers, ag retailers,
-    commodity traders, and policy analysts: <strong>where are the two stacking up at the
-    same time?</strong>
+    The Monitor combines federal crop-insurance coverage rates, current U.S. Drought
+    Monitor severity, NOAA's 90-day Seasonal Drought Outlook, and county-level planted
+    acres into a single county-by-county view. It answers questions like:
   </p>
-  <p>The Monitor was built to answer questions like:</p>
   <ul>
     <li>Which U.S. counties have the <strong>lowest federal crop insurance coverage</strong> right now, and how many of them are currently in drought?</li>
-    <li>Where is the <strong>coverage gap</strong> — uninsured planted acres — concentrated for corn, soybeans, wheat, cotton, sorghum, and rice?</li>
+    <li>Where is the <strong>coverage gap</strong> — uninsured planted acres — concentrated for corn, soybeans, wheat, cotton, and sorghum?</li>
     <li>Which counties' growing seasons are forecast to <strong>worsen</strong> under NOAA's 90-day Seasonal Drought Outlook?</li>
     <li>How does <strong>this week's</strong> drought map compare to the same week last year?</li>
   </ul>
@@ -483,7 +480,7 @@ footer .links a:hover { color: var(--accent); }
     <tbody>
       <tr>
         <td>USDA NASS</td>
-        <td>Planted acres by county and crop (corn, soy, wheat, cotton, sorghum, rice)</td>
+        <td>Planted acres by county and crop (corn, soy, wheat, cotton, sorghum)</td>
         <td>Annual + intra-year revisions</td>
       </tr>
       <tr>
@@ -511,23 +508,14 @@ footer .links a:hover { color: var(--accent); }
     Federal crop insurance is the largest farm-safety-net program in the United States,
     but participation is uneven. Major Corn Belt counties have near-universal participation
     in corn and soybean policies; specialty-crop counties, mixed-operation regions, and
-    parts of the country with low historical loss ratios often run much thinner. When a
-    drought lands on a thinly insured county, the resulting losses fall harder on
-    producers, ag lenders, suppliers, and regional buyers because there is less federal
-    backstop in the system.
+    parts of the country with low historical loss ratios often run much thinner. The
+    Monitor highlights the counties where that thin coverage overlaps with active drought.
   </p>
   <p>
     The Monitor surfaces those counties by reporting three numbers together — planted
-    acres, coverage gap, and drought severity — instead of one at a time. The
-    methodology, every transformation, every join key, and every weighting decision is
-    open-source on <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
-    The tool ships with a complete data pipeline and pre-built parquet caches; anyone can
-    rebuild it from scratch.
-  </p>
-  <p>
-    A short methodology note also lives in the project <a href="https://github.com/mcmillinanalytics/drought-exposure-tool#readme" rel="noopener">README</a>,
-    including the three-tier acreage waterfall, the wheat-class handling, and the known
-    quirks of RMA's Summary of Business schema.
+    acres, coverage gap, and drought severity — instead of one at a time. The full
+    methodology and source are open on
+    <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
   </p>
 </section>
 
@@ -570,8 +558,8 @@ footer .links a:hover { color: var(--accent); }
   <details class="faq">
     <summary>Is the U.S. Drought Exposure Monitor free?</summary>
     <p class="answer">
-      Yes. The tool is free to use with no signup, and the full source code, data
-      pipeline, and methodology are open source on
+      Yes. The tool is free to use with no signup, and the source code and methodology
+      are open on
       <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
     </p>
   </details>
@@ -580,18 +568,17 @@ footer .links a:hover { color: var(--accent); }
     <summary>Which crops are covered?</summary>
     <p class="answer">
       The major federally insured row crops: corn, soybeans, wheat (excluding durum, which
-      NASS does not publish at the county level under that series), cotton, sorghum, and
-      rice. These crops cover the bulk of insured U.S. acres.
+      NASS does not publish at the county level under that series), cotton, and sorghum.
+      These crops cover the bulk of insured U.S. acres.
     </p>
   </details>
 
   <details class="faq">
     <summary>Can I use the underlying data for my own analysis?</summary>
     <p class="answer">
-      Yes. Every source is public USDA, NOAA, or U.S. Drought Monitor data. The repository
-      contains the pre-built parquet caches and the full pipeline that produced them, so
-      you can either pull the parquets directly or re-run the pipeline against the
-      upstream APIs. Attribution to the original federal sources is appreciated.
+      Yes. Every input is public USDA, NOAA, or U.S. Drought Monitor data, and the
+      project links to each source. Attribution to the original federal sources is
+      appreciated.
     </p>
   </details>
 </section>
