@@ -290,7 +290,7 @@ article.project p {
   border: 1px solid var(--border);
 }
 
-.methodology-link {
+.methodology-link, .about-link {
   display: inline-block;
   margin-bottom: 22px;
   font-size: 14px;
@@ -298,7 +298,19 @@ article.project p {
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s ease;
 }
-.methodology-link:hover {
+.methodology-link:hover, .about-link:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+.about-link { margin-left: 18px; }
+.title-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.title-link:hover {
+  color: inherit;
   text-decoration: none;
   border-bottom-color: var(--accent);
 }
@@ -390,7 +402,7 @@ footer .links a:hover { color: var(--accent); }
 
 <article class="project reveal">
   <div class="project-body">
-    <h2>Field Risk Atlas</h2>
+    <h2><a class="title-link" href="/sgma">Field Risk Atlas</a></h2>
     <div class="project-meta">
       <span class="pill live"><span class="live-dot"></span>Live · May 2026 snapshot</span>
     </div>
@@ -410,6 +422,7 @@ footer .links a:hover { color: var(--accent); }
       classification anyone can audit.
     </p>
     <a class="methodology-link" href="https://sgma.mcmillinanalytics.com/methodology" rel="noopener">Read the methodology →</a>
+    <a class="about-link" href="/sgma">About Field Risk Atlas →</a>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://sgma.mcmillinanalytics.com" rel="noopener">
         Launch the atlas →
@@ -430,7 +443,7 @@ footer .links a:hover { color: var(--accent); }
 
 <article class="project reveal">
   <div class="project-body">
-    <h2>U.S. Drought Exposure Monitor</h2>
+    <h2><a class="title-link" href="/drought">U.S. Drought Exposure Monitor</a></h2>
     <div class="project-meta">
       <span class="pill live"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
     </div>
@@ -447,6 +460,7 @@ footer .links a:hover { color: var(--accent); }
       map and watch list. Refreshes weekly.
     </p>
     <a class="methodology-link" href="https://github.com/mcmillinanalytics/drought-exposure-tool#readme" rel="noopener">Read the methodology →</a>
+    <a class="about-link" href="/drought">About the Drought Monitor →</a>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
         Launch the monitor →
