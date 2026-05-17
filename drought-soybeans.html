@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which U.S. Soybean Counties Are Most Exposed to Drought? · Drought Exposure Monitor</title>
+
+<meta name="description" content="A county-level map of U.S. soybean planted acres, federal crop insurance coverage gaps, and current drought severity. Refreshed weekly. Free and open-source.">
+<meta name="author" content="John McMillin">
+<link rel="canonical" href="https://mcmillinanalytics.com/drought-soybeans">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Which U.S. soybean counties are most exposed to drought?">
+<meta property="og:description" content="A county-level view of soybean planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Refreshed weekly.">
+<meta property="og:url" content="https://mcmillinanalytics.com/drought-soybeans">
+<meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which U.S. soybean counties are most exposed to drought?">
+<meta name="twitter:description" content="Free, weekly county-level map of soybean planted acres, federal crop insurance coverage, and drought severity.">
+<meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E0B07">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "U.S. Drought Exposure Monitor — Soybeans",
+  "url": "https://drought.mcmillinanalytics.com/?crop=soybeans",
+  "applicationCategory": "DataVisualization",
+  "operatingSystem": "Any (web browser)",
+  "description": "County-level view of U.S. soybean planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Combines USDA NASS, RMA Summary of Business, and the U.S. Drought Monitor.",
+  "creator": {
+    "@type": "Person",
+    "name": "John McMillin",
+    "url": "https://mcmillinanalytics.com"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "McMillin Analytics", "item": "https://mcmillinanalytics.com/" },
+    { "@type": "ListItem", "position": 2, "name": "U.S. Drought Exposure Monitor", "item": "https://mcmillinanalytics.com/drought" },
+    { "@type": "ListItem", "position": 3, "name": "Soybeans", "item": "https://mcmillinanalytics.com/drought-soybeans" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which U.S. states grow the most soybeans?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Illinois and Iowa lead the country in planted soybean acreage, followed by Minnesota, North Dakota, South Dakota, Indiana, Missouri, Nebraska, Ohio, Kansas, and Arkansas. The Corn Belt and the Mississippi Delta together account for the bulk of national soybean production, with the Delta states pushing the crop further south than corn typically reaches."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the typical federal crop insurance coverage rate for soybeans?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Coverage rates for soybeans are among the highest of any U.S. row crop, on par with corn. In major Corn Belt and Delta states, federal crop-insurance participation regularly runs around 85% of planted acres. Coverage thins in states where soybeans are a smaller secondary crop, and in counties where producers prefer alternative private products or self-insure against weather risk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does soybean drought exposure differ from corn drought exposure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The geography overlaps heavily but isn't identical — soybeans extend further south through the Mississippi Delta, where corn acreage is thinner. Timing differs too. Corn's critical drought-stress window is July pollination; soybean's is August pod fill. A drought that arrives in late summer after corn has finished pollinating can still hit the soybean crop hard."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are U.S. soybeans most at risk from drought this week?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It changes weekly. The Drought Exposure Monitor reorders its soybean watch list every Thursday after the U.S. Drought Monitor publishes. Historically the western edges of the Corn Belt and the Mississippi Delta are the regions most prone to summer drought concentration. The current week's view is on the live tool."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0E0B07;
+  --surface: #16120C;
+  --surface-2: #1B1610;
+  --border: #2A241A;
+  --text: #F2EAD8;
+  --text-muted: #B0A892;
+  --text-dim: #76705F;
+  --accent: #E5B948;
+  --accent-bright: #F5CD5E;
+  --accent-soft: rgba(229, 185, 72, 0.12);
+  --live: #5AC998;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 36px rgba(0,0,0,0.5);
+  --shadow-hover: 0 1px 2px rgba(0,0,0,0.4), 0 20px 48px rgba(0,0,0,0.6);
+  --max-width: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.serif, h1, h2, h3 {
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; height: auto; }
+
+main { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 120px; }
+
+nav.breadcrumb {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+nav.breadcrumb a { color: var(--text-muted); }
+nav.breadcrumb a:hover { color: var(--accent); }
+nav.breadcrumb .sep { margin: 0 8px; color: var(--text-dim); }
+
+header.hero { margin-bottom: 56px; }
+header.hero .eyebrow {
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+header.hero .live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: var(--live);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(90, 201, 152, 0.25);
+  background: rgba(90, 201, 152, 0.08);
+}
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(90, 201, 152, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
+header.hero h1 {
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, var(--text) 0%, #C4BCA7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header.hero .lede {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+header.hero .lede strong { color: var(--text); font-weight: 600; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-size: 14.5px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--accent-bright); color: #1A1A1A; }
+.btn-primary:hover { background: var(--accent); color: #fff; }
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+figure.screenshot {
+  margin: 48px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+}
+figure.screenshot img { width: 100%; height: auto; display: block; }
+figure.screenshot figcaption {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #8F8772;
+  padding: 14px 26px 18px;
+  background: #000;
+  letter-spacing: 0.005em;
+}
+
+section.prose { margin: 48px 0; }
+section.prose h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+section.prose h3 {
+  font-size: 18.5px;
+  font-weight: 600;
+  margin: 28px 0 10px;
+  color: var(--text);
+}
+section.prose p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+section.prose p strong { color: var(--text); font-weight: 600; }
+section.prose ul, section.prose ol {
+  color: var(--text-muted);
+  margin: 0 0 18px 22px;
+}
+section.prose li { margin-bottom: 8px; }
+section.prose a { border-bottom: 1px solid rgba(229, 185, 72, 0.4); }
+section.prose a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+.sources-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 8px;
+  font-size: 14.5px;
+}
+.sources-table th, .sources-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.sources-table th {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.sources-table td { color: var(--text-muted); }
+.sources-table td:first-child { color: var(--text); font-weight: 500; }
+.sources-table tr:last-child td { border-bottom: none; }
+
+details.faq {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+}
+details.faq:last-of-type { border-bottom: 1px solid var(--border); }
+details.faq summary {
+  cursor: pointer;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+";
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+details.faq[open] summary::after { content: "−"; }
+details.faq .answer {
+  color: var(--text-muted);
+  margin-top: 14px;
+  line-height: 1.65;
+}
+
+aside.final-cta {
+  margin: 64px 0 0;
+  padding: 36px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+aside.final-cta h2 {
+  font-family: "Source Serif 4", serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+aside.final-cta p { color: var(--text-muted); margin-bottom: 20px; }
+
+footer {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+footer .links { display: flex; gap: 22px; }
+footer .links a { color: var(--text-muted); }
+footer .links a:hover { color: var(--accent); }
+
+@media (max-width: 540px) {
+  main { padding: 36px 18px 80px; }
+  header.hero { margin-bottom: 40px; }
+  figure.screenshot { margin: 32px -18px; border-radius: 0; border-left: none; border-right: none; }
+  aside.final-cta { padding: 28px 22px; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">McMillin Analytics</a>
+  <span class="sep">›</span>
+  <a href="/drought">Drought Exposure Monitor</a>
+  <span class="sep">›</span>
+  <span>Soybeans</span>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">
+    <span>Drought Exposure Monitor · Soybeans</span>
+    <span class="live-badge"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
+  </div>
+  <h1>Which U.S. soybean counties are most exposed to drought right now?</h1>
+  <p class="lede">
+    The <strong>U.S. Drought Exposure Monitor</strong> tracks roughly 85 million planted
+    soybean acres against federal crop-insurance coverage and the U.S. Drought Monitor's
+    weekly severity map. The soybean view is a county-by-county picture of where
+    soybean ground sits under active drought without a federal insurance backstop —
+    refreshed every Thursday.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com/?crop=soybeans" rel="noopener">
+      Open the soybean view →
+    </a>
+    <a class="btn btn-secondary" href="/drought">
+      Read the full methodology →
+    </a>
+  </div>
+</header>
+
+<figure class="screenshot">
+  <img src="screenshots/map_exposure.png"
+       alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
+  <figcaption>County-level exposure map — uninsured acres weighted by current drought severity. Darker counties are more exposed.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>Where U.S. soybeans are grown</h2>
+  <p>
+    Soybeans are the second-largest U.S. row crop by planted area, behind corn. Roughly
+    85 million acres go in the ground each year, concentrated in the same Corn Belt
+    geography as corn, with one important extension: soybeans push further south into
+    the Mississippi Delta. Arkansas, Mississippi, Louisiana, and the southern Missouri
+    Bootheel all run material soybean acreage that corn does not match. Illinois and
+    Iowa lead the country in planted soybeans, followed by Minnesota, North Dakota,
+    South Dakota, Indiana, Missouri, Nebraska, Ohio, Kansas, and Arkansas.
+  </p>
+  <p>
+    Soybean drought timing is also different from corn. The critical stress window is
+    August — pod fill and seed development — rather than corn's July pollination. A
+    late-summer drought that arrives after corn has finished pollinating can still hit
+    soybeans hard. The Monitor scores the two crops separately for this reason, even
+    when they're rotated on the same ground.
+  </p>
+</section>
+
+<section class="prose">
+  <h2>How drought exposure works for soybeans</h2>
+  <p>
+    Like corn, soybeans are heavily covered by federal crop insurance. In the major
+    soybean states — Illinois, Iowa, Minnesota, North Dakota, Indiana, Missouri,
+    Nebraska — participation runs at or near corn levels, typically around 85% of
+    planted acres. At the national headline level, soybeans do not have a
+    coverage-rate problem.
+  </p>
+  <p>
+    The math still bites at scale. A modest gap on an 85-million-acre planted base
+    leaves several million uninsured soybean acres nationally. The Monitor highlights
+    where those uninsured soybean acres are clustered and which of those clusters are
+    in active drought this week.
+  </p>
+  <p>
+    The exposure score uses the same three inputs the rest of the tool does: planted
+    acres from USDA NASS, insured acres from USDA RMA's Summary of Business, and
+    current drought severity from the U.S. Drought Monitor. Soybeans appear on their
+    own tab in the live tool.
+  </p>
+</section>
+
+<section class="prose">
+  <h2>Data sources for soybean drought exposure</h2>
+  <p>Every input that drives the soybean exposure score is public, free, and refreshed on a known cadence:</p>
+  <table class="sources-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>What it provides</th>
+        <th>Refresh</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>USDA NASS</td>
+        <td>Planted soybean acres by county, with three-tier waterfall for current-year coverage</td>
+        <td>Annual + intra-year revisions</td>
+      </tr>
+      <tr>
+        <td>USDA RMA Summary of Business</td>
+        <td>Federally insured soybean acres by county and coverage type</td>
+        <td>Monthly mid-year + crop-year close</td>
+      </tr>
+      <tr>
+        <td>U.S. Drought Monitor</td>
+        <td>Current drought severity (D0–D4) by county</td>
+        <td>Weekly, Thursdays</td>
+      </tr>
+      <tr>
+        <td>NOAA CPC Seasonal Drought Outlook</td>
+        <td>90-day forward outlook — development, persistence, improvement, removal</td>
+        <td>Monthly</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose" id="faq">
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq">
+    <summary>Which U.S. states grow the most soybeans?</summary>
+    <p class="answer">
+      Illinois and Iowa lead the country in planted soybean acreage, followed by
+      Minnesota, North Dakota, South Dakota, Indiana, Missouri, Nebraska, Ohio, Kansas,
+      and Arkansas. The Corn Belt and the Mississippi Delta together account for the
+      bulk of national soybean production, with the Delta states pushing the crop
+      further south than corn typically reaches.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>What is the typical federal crop insurance coverage rate for soybeans?</summary>
+    <p class="answer">
+      Coverage rates for soybeans are among the highest of any U.S. row crop, on par
+      with corn. In major Corn Belt and Delta states, federal crop-insurance
+      participation regularly runs around 85% of planted acres. Coverage thins in
+      states where soybeans are a smaller secondary crop, and in counties where
+      producers prefer alternative private products or self-insure against weather risk.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Why does soybean drought exposure differ from corn drought exposure?</summary>
+    <p class="answer">
+      The geography overlaps heavily but isn't identical — soybeans extend further
+      south through the Mississippi Delta, where corn acreage is thinner. Timing
+      differs too. Corn's critical drought-stress window is July pollination; soybean's
+      is August pod fill. A drought that arrives in late summer after corn has finished
+      pollinating can still hit the soybean crop hard.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Where are U.S. soybeans most at risk from drought this week?</summary>
+    <p class="answer">
+      It changes weekly. The Monitor reorders its soybean watch list every Thursday
+      after the U.S. Drought Monitor publishes. Historically the western edges of the
+      Corn Belt and the Mississippi Delta are the regions most prone to summer drought
+      concentration. The current week's view is on the live tool.
+    </p>
+  </details>
+</section>
+
+<aside class="final-cta">
+  <h2>Open the soybean view</h2>
+  <p>
+    The live tool opens with the soybean tab already selected. Pick a state and the
+    watch list reorders to show which soybean counties are most exposed this week.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com/?crop=soybeans" rel="noopener">
+      Open the soybean view →
+    </a>
+    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">
+      Source on GitHub →
+    </a>
+  </div>
+</aside>
+
+<footer>
+  <div>© 2026 McMillin Analytics · John McMillin</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/drought">Drought Monitor</a>
+    <a href="https://github.com/mcmillinanalytics" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/johnmcmillin/" rel="noopener">LinkedIn</a>
+    <a href="mailto:mcmillinanalytics@gmail.com">Email</a>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function () {
+  var refresh = document.getElementById('refresh-text');
+  if (!refresh) return;
+  fetch('https://api.github.com/repos/mcmillinanalytics/drought-exposure-tool/actions/workflows/refresh-data.yml/runs?status=success&per_page=1', {
+    headers: { 'Accept': 'application/vnd.github+json' }
+  })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var run = data && data.workflow_runs && data.workflow_runs[0];
+      if (!run) return;
+      var d = new Date(run.updated_at);
+      if (isNaN(d.getTime())) return;
+      var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      refresh.textContent = 'Live · refreshed ' + label;
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>
