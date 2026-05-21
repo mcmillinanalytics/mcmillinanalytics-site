@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Which California Ag Parcels Are Most Exposed to SGMA Water Restrictions? · Field Risk Atlas</title>
 
-<meta name="description" content="A free, interactive parcel-level water-risk map for California agricultural land. Scores every farmable parcel in nine San Joaquin Valley and Sonoma counties on SGMA basin status, water-district reliability, crop type, well depth, and drought exposure.">
+<meta name="description" content="A free, interactive parcel-level water-risk map for California agricultural land. Search any parcel by APN, or browse all farmable parcels in nine San Joaquin Valley and Sonoma counties — each scored on SGMA basin status, water-district reliability, crop type, well depth, and drought exposure.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/sgma">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which California ag parcels are most exposed to SGMA water restrictions?">
-<meta property="og:description" content="A parcel-level water-risk framework for California agricultural land. Built from public DWR, USDA, U.S. Drought Monitor, and ASFMRA data.">
+<meta property="og:description" content="A parcel-level water-risk framework for California agricultural land. Search by APN or browse all 375,000 farmable parcels in nine counties. Built from public DWR, USDA, U.S. Drought Monitor, and ASFMRA data.">
 <meta property="og:url" content="https://mcmillinanalytics.com/sgma">
 <meta property="og:image" content="https://mcmillinanalytics.com/fra-card.png">
 <meta property="og:image:width" content="1907">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Which California ag parcels are most exposed to SGMA water restrictions?">
-<meta name="twitter:description" content="Parcel-level water-risk map for California agricultural land across nine counties.">
+<meta name="twitter:description" content="Parcel-level water-risk map for California agricultural land. Search by APN across nine counties.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/fra-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://sgma.mcmillinanalytics.com",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "A water-risk framework for California agricultural land. Scores every farmable parcel in nine San Joaquin Valley and Sonoma counties on water risk, built from public data — basin status under California's Sustainable Groundwater Management Act (SGMA), water-district reliability, dominant crop type, local well depth, and drought exposure. Output is a 0–100 score and a five-band classification anyone can audit.",
+  "description": "A water-risk framework for California agricultural land. Search any parcel by APN, or browse every farmable parcel in nine San Joaquin Valley and Sonoma counties — each scored on water risk, built from public data: basin status under California's Sustainable Groundwater Management Act (SGMA), water-district reliability, dominant crop type, local well depth, and drought exposure. Output is a 0–100 score and a five-band classification anyone can audit.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -78,6 +78,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Nine counties: the eight San Joaquin Valley counties — San Joaquin, Stanislaus, Merced, Madera, Fresno, Kings, Tulare, and Kern — plus Sonoma. Together they contain roughly 375,000 farmable parcels and the bulk of California's perennial-crop acreage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I look up a specific parcel by APN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every farmable parcel in the nine covered counties is indexed by its county Assessor's Parcel Number (APN). Paste an APN into the search box and the atlas zooms to that parcel and opens its full water-risk breakdown — SGMA basin status, GSP status, water-district tier, crop class, well depth, and drought exposure. You can also browse the map and click any parcel directly."
       }
     },
     {
@@ -455,7 +463,8 @@ footer .links a:hover { color: var(--accent); }
     every farmable parcel in nine California counties — the San Joaquin Valley plus Sonoma —
     on water risk under the Sustainable Groundwater Management Act. Each parcel gets a
     0&ndash;100 score and a five-band classification built from public DWR, USDA, U.S.
-    Drought Monitor, and ASFMRA data. Free, open-methodology, parcel-level.
+    Drought Monitor, and ASFMRA data. <strong>Search by APN</strong> to pull up a specific
+    parcel, or pan the map. Free, open-methodology, parcel-level.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://sgma.mcmillinanalytics.com" rel="noopener">
@@ -583,6 +592,17 @@ footer .links a:hover { color: var(--accent); }
   </details>
 
   <details class="faq">
+    <summary>Can I look up a specific parcel by APN?</summary>
+    <p class="answer">
+      Yes. Every farmable parcel in the nine covered counties is indexed by its county
+      Assessor's Parcel Number (APN). Paste an APN into the search box and the atlas zooms
+      to that parcel and opens its full water-risk breakdown — SGMA basin status, GSP
+      status, water-district tier, crop class, well depth, and drought exposure. You can
+      also browse the map and click any parcel directly.
+    </p>
+  </details>
+
+  <details class="faq">
     <summary>Which crops are most exposed to SGMA pumping restrictions?</summary>
     <p class="answer">
       Perennial, high-water crops in critical-overdraft subbasins carry the most
@@ -628,9 +648,9 @@ footer .links a:hover { color: var(--accent); }
 <aside class="final-cta">
   <h2>Open the live atlas</h2>
   <p>
-    Pan to any county, click any parcel, and the side panel reports the full water-risk
-    breakdown — subbasin, GSP status, water-district tier, crop class, well depth, and
-    52-week drought exposure.
+    Search by APN, or pan to any county and click any parcel. The side panel reports the
+    full water-risk breakdown — subbasin, GSP status, water-district tier, crop class,
+    well depth, and 52-week drought exposure.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://sgma.mcmillinanalytics.com" rel="noopener">
