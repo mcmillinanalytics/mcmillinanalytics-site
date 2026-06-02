@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Your County Doing Better or Worse Than Expected? · Civic Value Atlas</title>
+
+<meta name="description" content="A free, interactive U.S. county map. Weight the public outcomes you care about — schools, health, safety, opportunity — and see which counties do better or worse than you'd expect for their circumstances. Built from public Census, CDC, Stanford, and Opportunity Atlas data.">
+<meta name="author" content="John McMillin">
+<link rel="canonical" href="https://mcmillinanalytics.com/civicvalueatlas">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Is your county doing better or worse than you'd expect?">
+<meta property="og:description" content="A national county-level map. Weight the outcomes you care about, then see which counties beat or fall short of what their circumstances and spending would predict. Free, built on public data.">
+<meta property="og:url" content="https://mcmillinanalytics.com/civicvalueatlas">
+<meta property="og:image" content="https://mcmillinanalytics.com/screenshots/civic-value-atlas.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Is your county doing better or worse than you'd expect?">
+<meta name="twitter:description" content="Weight the outcomes you care about. See which U.S. counties beat the expectations set by their circumstances. Free, public data.">
+<meta name="twitter:image" content="https://mcmillinanalytics.com/screenshots/civic-value-atlas.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E0B07">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Civic Value Atlas",
+  "url": "https://civicvalueatlas.mcmillinanalytics.com",
+  "applicationCategory": "DataVisualization",
+  "operatingSystem": "Any (web browser)",
+  "description": "A national, county-level interactive map. Weight the public outcomes you care about — education, health, safety, and economic mobility — and see how each U.S. county is doing, both on the raw results and on how those results compare to what the county's circumstances and spending would predict. Built entirely from public data.",
+  "creator": {
+    "@type": "Person",
+    "name": "John McMillin",
+    "url": "https://mcmillinanalytics.com"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "McMillin Analytics", "item": "https://mcmillinanalytics.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Civic Value Atlas", "item": "https://mcmillinanalytics.com/civicvalueatlas" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the Civic Value Atlas show?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It maps how every U.S. county is doing on the public outcomes people care about — schools, health, public safety, and economic mobility — and lets you weight those topics yourself. You can color the map two ways: by the raw outcomes (who's doing well), or by performance vs. expectations (who's doing better or worse than you'd expect given their circumstances and what they spend)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does \"performance vs. expectations\" mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For each topic, a statistical model predicts how a county should score based on the things it can't change quickly — its size, density, how rural it is, its age mix, income, and child poverty — plus what it spends. The gap between a county's actual result and that prediction is the heart of the view: it surfaces counties that beat the expectations set by their circumstances, and ones that fall short."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does the data come from, and is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, it's free with no signup. Every number traces back to a public source: Census TIGER geography and the Census of Governments for spending, the Stanford Education Data Archive for schools, County Health Rankings and CDC PLACES for health, CDC and NCHS for safety, and the Census Bureau / Opportunity Insights Opportunity Atlas for economic mobility."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0E0B07;
+  --surface: #16120C;
+  --surface-2: #1B1610;
+  --border: #2A241A;
+  --text: #F2EAD8;
+  --text-muted: #B0A892;
+  --text-dim: #76705F;
+  --accent: #E5B948;
+  --accent-bright: #F5CD5E;
+  --accent-soft: rgba(229, 185, 72, 0.12);
+  --live: #5AC998;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 36px rgba(0,0,0,0.5);
+  --shadow-hover: 0 1px 2px rgba(0,0,0,0.4), 0 20px 48px rgba(0,0,0,0.6);
+  --max-width: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.serif, h1, h2, h3 {
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; height: auto; }
+
+main { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 120px; }
+
+nav.breadcrumb {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+nav.breadcrumb a { color: var(--text-muted); }
+nav.breadcrumb a:hover { color: var(--accent); }
+nav.breadcrumb .sep { margin: 0 8px; color: var(--text-dim); }
+
+header.hero { margin-bottom: 56px; }
+header.hero .eyebrow {
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+header.hero .live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: var(--live);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(90, 201, 152, 0.25);
+  background: rgba(90, 201, 152, 0.08);
+}
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90, 201, 152, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(90, 201, 152, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+}
+header.hero h1 {
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, var(--text) 0%, #C4BCA7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header.hero .lede {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+header.hero .lede strong { color: var(--text); font-weight: 600; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-size: 14.5px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--accent-bright); color: #1A1A1A; }
+.btn-primary:hover { background: var(--accent); color: #fff; }
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+figure.screenshot {
+  margin: 48px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+}
+figure.screenshot img { width: 100%; height: auto; display: block; }
+figure.screenshot figcaption {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #8F8772;
+  padding: 14px 26px 18px;
+  background: #000;
+  letter-spacing: 0.005em;
+}
+
+section.prose { margin: 48px 0; }
+section.prose h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+section.prose h3 {
+  font-size: 18.5px;
+  font-weight: 600;
+  margin: 28px 0 10px;
+  color: var(--text);
+}
+section.prose p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+section.prose p strong { color: var(--text); font-weight: 600; }
+section.prose ul, section.prose ol {
+  color: var(--text-muted);
+  margin: 0 0 18px 22px;
+}
+section.prose li { margin-bottom: 8px; }
+section.prose a { border-bottom: 1px solid rgba(229, 185, 72, 0.4); }
+section.prose a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+.sources-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 8px;
+  font-size: 14.5px;
+}
+.sources-table th, .sources-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.sources-table th {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.sources-table td { color: var(--text-muted); }
+.sources-table td:first-child { color: var(--text); font-weight: 500; }
+.sources-table tr:last-child td { border-bottom: none; }
+
+details.faq {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+}
+details.faq:last-of-type { border-bottom: 1px solid var(--border); }
+details.faq summary {
+  cursor: pointer;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+";
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+details.faq[open] summary::after { content: "−"; }
+details.faq .answer {
+  color: var(--text-muted);
+  margin-top: 14px;
+  line-height: 1.65;
+}
+
+aside.final-cta {
+  margin: 64px 0 0;
+  padding: 36px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+aside.final-cta h2 {
+  font-family: "Source Serif 4", serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+aside.final-cta p { color: var(--text-muted); margin-bottom: 20px; }
+
+footer {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+footer .links { display: flex; gap: 22px; }
+footer .links a { color: var(--text-muted); }
+footer .links a:hover { color: var(--accent); }
+
+@media (max-width: 540px) {
+  main { padding: 36px 18px 80px; }
+  header.hero { margin-bottom: 40px; }
+  figure.screenshot { margin: 32px -18px; border-radius: 0; border-left: none; border-right: none; }
+  aside.final-cta { padding: 28px 22px; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">McMillin Analytics</a>
+  <span class="sep">›</span>
+  <span>Civic Value Atlas</span>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">
+    <span>Civic Value Atlas</span>
+    <span class="live-badge"><span class="live-dot"></span>Live</span>
+  </div>
+  <h1>Is your county doing better or worse than you'd expect?</h1>
+  <p class="lede">
+    The <strong>Civic Value Atlas</strong> is a national, county-level map of how every
+    U.S. county is doing on the things people care about — <strong>schools, health,
+    public safety, and economic mobility</strong>. Move four sliders to weight what
+    matters to you and the map recolors in real time. Then switch from the raw outcomes
+    to <strong>performance vs. expectations</strong> — which counties beat, or fall short
+    of, what their circumstances and spending would predict. Free, built entirely on
+    public data.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://civicvalueatlas.mcmillinanalytics.com" rel="noopener">
+      Launch the map →
+    </a>
+    <a class="btn btn-secondary" href="https://civicvalueatlas.mcmillinanalytics.com/about.html" rel="noopener">
+      How it works →
+    </a>
+  </div>
+</header>
+
+<figure class="screenshot">
+  <img src="screenshots/civic-value-atlas.png"
+       alt="Civic Value Atlas — a map of the United States with every county colored by outcome score, from cream through teal to navy. A control panel on the right holds sliders for education, health, safety, and economic mobility, a view toggle between Outcomes and Performance, and a 'compare across the country / your state only' option.">
+  <figcaption>Weight the outcomes you care about; the map recolors live. Switch to Performance vs. Expectations to see who beats the odds their circumstances set.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>What the map shows</h2>
+  <p>
+    Every county in America spends public money and gets results residents can feel. The
+    Civic Value Atlas puts those side by side and lets you color the map two ways:
+  </p>
+  <ul>
+    <li><strong>Outcomes</strong> — how well a county is doing on the topics you've
+      weighted, from 0 to 100. The straightforward "who's doing well" picture.</li>
+    <li><strong>Performance vs. Expectations</strong> — whether a county's results beat or
+      fall short of what you'd expect given its circumstances and spending. The counties
+      doing more with what they have, and the ones coming up short.</li>
+  </ul>
+  <p>
+    You decide what "doing well" means. Drag the sliders for education, health, safety, and
+    economic mobility, or start from a preset, and everything — the map, the rankings, the
+    standouts — updates instantly.
+  </p>
+
+  <h2>How "performance vs. expectations" works</h2>
+  <p>
+    Two counties aren't really comparable if one is a dense, wealthy suburb and the other a
+    small rural county with an older population — they start from very different places. So
+    for each topic we build a model that learns the typical relationship, across all
+    counties, between a county's results and the things it can't change overnight: how much
+    it spends, how many people live there and how densely, how rural it is, its age mix, and
+    its income. The model predicts what a county "should" score. The gap between its actual
+    result and that prediction is what the Performance view colors — above expected in teal,
+    below expected in rust.
+  </p>
+  <p>
+    It's a description, not a verdict. A county doing better than expected isn't proof its
+    government runs better — it means its results are higher than the model predicted, for
+    reasons the model can't see. Read it as "this place does better than similar places."
+  </p>
+
+  <h2>Where the data comes from</h2>
+  <p>Every number traces back to a public dataset:</p>
+  <table class="sources-table">
+    <thead><tr><th>Topic</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>County geography</td><td>U.S. Census TIGER/Line</td></tr>
+      <tr><td>Education</td><td>Stanford Education Data Archive (SEDA)</td></tr>
+      <tr><td>Health</td><td>County Health Rankings · CDC PLACES</td></tr>
+      <tr><td>Safety</td><td>CDC &amp; NCHS (homicide, drug overdose)</td></tr>
+      <tr><td>Economic mobility</td><td>Opportunity Atlas (Census Bureau · Opportunity Insights)</td></tr>
+      <tr><td>Local spending</td><td>Census of Governments · BEA price adjustment</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose">
+  <h2>Common questions</h2>
+
+  <details class="faq">
+    <summary>Does it judge whether a county is well governed?</summary>
+    <p class="answer">
+      No. The map describes results, not the quality of government. A county can come out
+      above expected because of a strong local institution, a particular history, or a state
+      program run from the capital — things the model can't see. Read a county's gap as "it's
+      doing better, or worse, than similar places," not as a grade on its leaders.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Does spending drive the results?</summary>
+    <p class="answer">
+      Less than you might think. Across counties, how much a place spends explains
+      surprisingly little of the difference in outcomes — a county's circumstances explain far
+      more. That's exactly why the Performance view holds those circumstances steady and looks
+      at what's left over.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Can I compare a county only to others in its state?</summary>
+    <p class="answer">
+      Yes. Flip "compare across" to "your state only" and every county is re-ranked against its
+      in-state neighbors — 50 is the state middle, 0 is worst in the state, 100 is best. It's a
+      useful lens because voters can change their own state's laws and school-funding rules, but
+      not their neighbors'.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Is it free?</summary>
+    <p class="answer">
+      Yes — free to use, no signup. Every input is public data, and the full methodology,
+      sources, and limits are written out on the <a href="https://civicvalueatlas.mcmillinanalytics.com/about.html" rel="noopener">how-it-works page</a>.
+    </p>
+  </details>
+</section>
+
+<aside class="final-cta">
+  <h2>Open the live map</h2>
+  <p>
+    Weight the outcomes you care about, find your county, and see whether it's beating the
+    expectations its circumstances set — or falling short.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://civicvalueatlas.mcmillinanalytics.com" rel="noopener">
+      Launch the map →
+    </a>
+    <a class="btn btn-secondary" href="https://civicvalueatlas.mcmillinanalytics.com/about.html" rel="noopener">
+      How it works →
+    </a>
+  </div>
+</aside>
+
+<footer>
+  <div>© 2026 McMillin Analytics · John McMillin</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="https://github.com/mcmillinanalytics" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/johnmcmillin/" rel="noopener">LinkedIn</a>
+    <a href="mailto:mcmillinanalytics@gmail.com">Email</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
