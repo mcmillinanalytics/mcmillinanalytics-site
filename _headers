@@ -8,3 +8,8 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# Screenshots reuse filenames when refreshed, so make browsers revalidate
+# (cheap 304s) instead of serving a heuristically-cached stale copy.
+/screenshots/*
+  Cache-Control: public, max-age=0, must-revalidate
