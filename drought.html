@@ -466,7 +466,7 @@ footer .links a:hover { color: var(--accent); }
 
 <figure class="screenshot">
   <img src="screenshots/map_exposure.png"
-       alt="County-level map of the United States showing uninsured drought exposure scores. The Texas panhandle, Mississippi delta, and Mid-Atlantic regions show concentrated red coloring indicating high exposure.">
+       alt="County-level map of the United States shaded by uninsured drought exposure — counties with planted acres at risk under current drought show the deepest red.">
   <figcaption>County-level exposure map — uninsured acres weighted by current drought severity. Darker counties are more exposed.</figcaption>
 </figure>
 
@@ -505,6 +505,21 @@ footer .links a:hover { color: var(--accent); }
   <img src="screenshots/scatter_drought_gap.png"
        alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0 to 5, Y-axis is coverage gap 0 to 100 percent. The top-right cluster represents the highest-exposure counties.">
   <figcaption>Drought severity × coverage gap, sized by planted acres. Top-right is the watch list.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>Watching drought over time</h2>
+  <p>
+    The Monitor also keeps a monthly record of U.S. Drought Monitor severity back to
+    2000. A play button animates the map through the full history, so persistent,
+    multi-year droughts — like the 2012 event below — read at a glance.
+  </p>
+</section>
+
+<figure class="screenshot">
+  <img src="screenshots/map_drought_overtime.png"
+       alt="County-level map of the contiguous United States shaded by U.S. Drought Monitor severity for August 2012, when deep drought covered most of the central and western states. A timeline scrubber set to Aug 2012 sits below the map.">
+  <figcaption>Drought severity, August 2012 — the play button animates the monthly record back to 2000.</figcaption>
 </figure>
 
 <section class="prose">
