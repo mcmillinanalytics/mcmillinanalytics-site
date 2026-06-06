@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Much Water and Power Does a Data Center Use — Compared to Almonds, Cities, and Power Plants? · Resource Ledger</title>
+
+<meta name="description" content="A free, interactive tool that puts every large user of water and electricity on one yardstick — almonds, alfalfa, cities, power plants, semiconductor fabs, golf courses, and data centers — so you can compare what any of them draws in the others' terms. Public data only; water withdrawal and consumption kept separate; every figure a sourced range.">
+<meta name="author" content="John McMillin">
+<link rel="canonical" href="https://mcmillinanalytics.com/resource-ledger">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="How much water and power does a data center use — compared to everything else?">
+<meta property="og:description" content="One yardstick for what large users draw from water and electricity. Compare a data center, an almond orchard, a city, or a power plant — on public data, with withdrawal and consumption kept separate.">
+<meta property="og:url" content="https://mcmillinanalytics.com/resource-ledger">
+<meta property="og:image" content="https://mcmillinanalytics.com/screenshots/resource-ledger.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How much water and power does a data center use — compared to everything else?">
+<meta name="twitter:description" content="One yardstick for what large users draw from water and electricity — almonds, cities, power plants, data centers. Public data only.">
+<meta name="twitter:image" content="https://mcmillinanalytics.com/screenshots/resource-ledger.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E0B07">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Resource Ledger",
+  "url": "https://ledger.mcmillinanalytics.com",
+  "applicationCategory": "DataVisualization",
+  "operatingSystem": "Any (web browser)",
+  "description": "Compare what large users draw from water and electricity — almonds, alfalfa, cities, power plants, semiconductor fabs, golf courses, and data centers — on one yardstick, in interchangeable, human-legible units. Water withdrawal and consumption are tracked separately and every figure is a sourced range. Built entirely on public data.",
+  "creator": { "@type": "Person", "name": "John McMillin", "url": "https://mcmillinanalytics.com" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "McMillin Analytics", "item": "https://mcmillinanalytics.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Resource Ledger", "item": "https://mcmillinanalytics.com/resource-ledger" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the Resource Ledger compare?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It puts large users of water and electricity on a single scale — almonds, alfalfa, cities, power plants, semiconductor fabs, golf courses, and data centers — and expresses what any one of them draws in terms of the others. Pick a user and a quantity, choose a resource (water consumed, water withdrawn, or electricity), and it returns the equivalent number of households, acres, power plants, and so on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between water withdrawal and consumption?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Withdrawal is water drawn from a source; consumption is the portion that is not returned — evaporated, transpired, or otherwise lost. They can differ enormously: a once-through-cooled power plant withdraws 20,000–50,000 gallons per MWh but consumes only a few hundred, because most of the water returns to the river. The Resource Ledger keeps the two on separate tracks and never mixes them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Isn't this just an argument against data centers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every user is measured exactly the same way — an almond orchard and a data center are just rows in the same ledger. The symmetry is the point: it is an accounting of what large users draw, not a verdict on any one of them. Data centers are a timely example, not the target."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does the data come from?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every figure is public and cited inline: EPA WaterSense (household water), EIA (residential electricity), UC ANR, the Pacific Institute, and UC Davis (crop water), the Lawrence Berkeley National Laboratory 2024 data-center report (data-center energy and water), the Union of Concerned Scientists and NREL (power-plant cooling), the World Economic Forum and Manufacturing Dive (semiconductor fabs), and the GCSAA (golf courses)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is every number shown as a range?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Real-world intensities vary. Data-center cooling water spans roughly five-fold depending on the cooling system; crop water depends on climate and irrigation. Every figure carries a low, typical, and high estimate, and the range propagates through every comparison. A range is the honest answer; a single number would imply a precision the underlying data does not have."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Resource Ledger free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is free to use with no signup, every input is public, and the full dataset, sources, and methodology are open."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0E0B07;
+  --surface: #16120C;
+  --surface-2: #1B1610;
+  --border: #2A241A;
+  --text: #F2EAD8;
+  --text-muted: #B0A892;
+  --text-dim: #76705F;
+  --accent: #E5B948;
+  --accent-bright: #F5CD5E;
+  --accent-soft: rgba(229, 185, 72, 0.12);
+  --water: #5AA9C9;
+  --power: #E59A5C;
+  --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 14px 36px rgba(0,0,0,0.5);
+  --max-width: 760px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.serif, h1, h2, h3 {
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+main { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 120px; }
+
+nav.breadcrumb {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+nav.breadcrumb a { color: var(--text-muted); }
+nav.breadcrumb a:hover { color: var(--accent); }
+nav.breadcrumb .sep { margin: 0 8px; color: var(--text-dim); }
+
+header.hero { margin-bottom: 48px; }
+header.hero .eyebrow {
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+header.hero h1 {
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, var(--text) 0%, #C4BCA7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header.hero .lede { font-size: 18px; line-height: 1.65; color: var(--text-muted); margin-bottom: 28px; }
+header.hero .lede strong { color: var(--text); font-weight: 600; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 20px; border-radius: 6px; font-size: 14.5px; font-weight: 500;
+  border: 1px solid transparent; text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--accent-bright); color: #1A1A1A; }
+.btn-primary:hover { background: var(--accent); color: #fff; }
+.btn-secondary { background: transparent; border-color: var(--border); color: var(--text); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+section.prose { margin: 44px 0; }
+section.prose h2 { font-size: 26px; font-weight: 600; letter-spacing: -0.005em; margin-bottom: 18px; color: var(--text); }
+section.prose p { color: var(--text-muted); margin-bottom: 16px; }
+section.prose p strong { color: var(--text); font-weight: 600; }
+section.prose ul { color: var(--text-muted); margin: 0 0 18px 22px; }
+section.prose li { margin-bottom: 8px; }
+section.prose a { border-bottom: 1px solid rgba(229, 185, 72, 0.4); }
+section.prose a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+.callout {
+  margin: 24px 0;
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--water);
+  border-radius: 0 10px 10px 0;
+}
+.callout p { margin: 0; color: var(--text-muted); }
+.callout p strong { color: var(--text); }
+
+.sources-table { width: 100%; border-collapse: collapse; margin: 20px 0 8px; font-size: 14.5px; }
+.sources-table th, .sources-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.sources-table th { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+.sources-table td { color: var(--text-muted); }
+.sources-table td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+.sources-table tr:last-child td { border-bottom: none; }
+
+details.faq { border-top: 1px solid var(--border); padding: 20px 0; }
+details.faq:last-of-type { border-bottom: 1px solid var(--border); }
+details.faq summary {
+  cursor: pointer; font-family: "Source Serif 4", Georgia, serif; font-size: 18px; font-weight: 600;
+  color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: "+"; font-family: "JetBrains Mono", monospace; color: var(--accent); font-size: 22px; line-height: 1; }
+details.faq[open] summary::after { content: "\2212"; }
+details.faq .answer { color: var(--text-muted); margin-top: 14px; line-height: 1.65; }
+
+aside.final-cta {
+  margin: 60px 0 0; padding: 36px 32px; background: var(--surface);
+  border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 10px;
+}
+aside.final-cta h2 { font-family: "Source Serif 4", serif; font-size: 22px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+aside.final-cta p { color: var(--text-muted); margin-bottom: 20px; }
+
+footer {
+  margin-top: 96px; padding-top: 32px; border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between;
+  color: var(--text-dim); font-size: 14px;
+}
+footer .links { display: flex; gap: 22px; }
+footer .links a { color: var(--text-muted); }
+footer .links a:hover { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (max-width: 540px) {
+  main { padding: 36px 18px 80px; }
+  header.hero { margin-bottom: 40px; }
+  aside.final-cta { padding: 28px 22px; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">McMillin Analytics</a>
+  <span class="sep">›</span>
+  <span>Resource Ledger</span>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Resource Ledger</div>
+  <h1>How much water and power does a data center use — compared to almonds, cities, and power plants?</h1>
+  <p class="lede">
+    The <strong>Resource Ledger</strong> puts every large user of water and electricity on
+    <strong>one yardstick</strong>. Pick a user — an almond orchard, a city, a power plant, a
+    data center — and see what it draws expressed in the others' terms. Every number is public
+    and sourced, water <strong>withdrawal</strong> and <strong>consumption</strong> are kept
+    separate, and each figure is a range, not a single headline.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://ledger.mcmillinanalytics.com" rel="noopener">
+      Launch the ledger →
+    </a>
+  </div>
+</header>
+
+<figure class="screenshot" hidden>
+  <!-- screenshot added after the tool is deployed -->
+</figure>
+
+<section class="prose">
+  <h2>What it answers</h2>
+  <p>
+    The "almonds versus data centers" water debate, and the broader fight over who gets scarce
+    water and power, usually trades in numbers nobody can picture — millions of gallons,
+    hundreds of megawatts. The Resource Ledger converts those into something legible by holding
+    every large user to the same measure:
+  </p>
+  <ul>
+    <li>What does a <strong>100-megawatt data center</strong> draw, in <strong>households</strong> of electricity or <strong>acres of almonds</strong> of water?</li>
+    <li>How does an <strong>almond orchard</strong> compare to an <strong>alfalfa field</strong> — or to a <strong>golf course</strong> — acre for acre?</li>
+    <li>How much water does a <strong>semiconductor fab</strong> use against a small <strong>city</strong>?</li>
+    <li>Why does a power plant's water <strong>withdrawal</strong> look enormous while its <strong>consumption</strong> is tiny?</li>
+  </ul>
+</section>
+
+<section class="prose">
+  <h2>How the comparison works</h2>
+  <p>
+    Each user carries a <strong>resource intensity</strong> — water and electricity per acre, per
+    megawatt, per facility, per household, per year. To compare two users, the ledger converts
+    your chosen quantity into base units (acre-feet per year for water, MWh per year for power),
+    then expresses it as the equivalent number of any other user. Three things are baked in:
+  </p>
+  <ul>
+    <li><strong>Three separate tracks.</strong> Water withdrawn, water consumed, and electricity are never cross-converted — you can only compare like with like.</li>
+    <li><strong>Ranges, not points.</strong> Every figure is a low / typical / high estimate, and the range carries through every comparison.</li>
+    <li><strong>Operational only.</strong> It counts the running draw, not the water and energy embodied in construction or equipment.</li>
+  </ul>
+</section>
+
+<div class="callout">
+  <p>
+    <strong>Withdrawal is not consumption.</strong> A once-through-cooled power plant
+    <em>withdraws</em> 20,000–50,000 gallons of water per megawatt-hour but <em>consumes</em>
+    only a few hundred — almost all of it returns to the river. An almond orchard consumes nearly
+    everything it is given. Conflating the two is the most common mistake in water debates, so the
+    ledger keeps them on separate tracks and lets you switch between them.
+  </p>
+</div>
+
+<section class="prose">
+  <h2>Why symmetry is the point</h2>
+  <p>
+    Data centers are the timely reason to look, but they are not the target. Every user — an
+    orchard, a city, a chip fab, a data center — is measured exactly the same way and shows up as
+    a row in the same ledger. That symmetry is deliberate: it makes this an <strong>accounting of
+    what large users draw, not a verdict</strong> on any one of them. A developer and a
+    conservation group should both be able to cite it and simply disagree about which row matters.
+  </p>
+</section>
+
+<section class="prose">
+  <h2>Data sources</h2>
+  <p>Every figure is public and cited inline in the tool:</p>
+  <table class="sources-table">
+    <thead><tr><th>Source</th><th>What it provides</th></tr></thead>
+    <tbody>
+      <tr><td>EPA WaterSense</td><td>Average U.S. household water use</td></tr>
+      <tr><td>U.S. EIA</td><td>Average residential electricity use</td></tr>
+      <tr><td>UC ANR · Pacific Institute · UC Davis</td><td>Crop applied water and evapotranspiration (almonds, alfalfa)</td></tr>
+      <tr><td>LBNL (2024 Data Center Energy Usage Report)</td><td>Data-center electricity use and water (WUE)</td></tr>
+      <tr><td>UCS · NREL (Macknick)</td><td>Power-plant cooling withdrawal and consumption</td></tr>
+      <tr><td>WEF · Manufacturing Dive</td><td>Semiconductor fab water and power</td></tr>
+      <tr><td>GCSAA</td><td>Golf course water use</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose" id="faq">
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq">
+    <summary>What does the Resource Ledger compare?</summary>
+    <p class="answer">
+      It puts large users of water and electricity on a single scale — almonds, alfalfa, cities,
+      power plants, semiconductor fabs, golf courses, and data centers — and expresses what any one
+      of them draws in terms of the others. Pick a user and a quantity, choose a resource (water
+      consumed, water withdrawn, or electricity), and it returns the equivalent number of
+      households, acres, power plants, and so on.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>What is the difference between water withdrawal and consumption?</summary>
+    <p class="answer">
+      Withdrawal is water drawn from a source; consumption is the portion that is not returned —
+      evaporated, transpired, or otherwise lost. They can differ enormously: a once-through-cooled
+      power plant withdraws 20,000–50,000 gallons per MWh but consumes only a few hundred, because
+      most of the water returns to the river. The Resource Ledger keeps the two on separate tracks
+      and never mixes them.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Isn't this just an argument against data centers?</summary>
+    <p class="answer">
+      No. Every user is measured exactly the same way — an almond orchard and a data center are
+      just rows in the same ledger. The symmetry is the point: it is an accounting of what large
+      users draw, not a verdict on any one of them. Data centers are a timely example, not the
+      target.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Where does the data come from?</summary>
+    <p class="answer">
+      Every figure is public and cited inline: EPA WaterSense (household water), EIA (residential
+      electricity), UC ANR, the Pacific Institute, and UC Davis (crop water), the Lawrence Berkeley
+      National Laboratory 2024 data-center report (data-center energy and water), the Union of
+      Concerned Scientists and NREL (power-plant cooling), the World Economic Forum and
+      Manufacturing Dive (semiconductor fabs), and the GCSAA (golf courses).
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Why is every number shown as a range?</summary>
+    <p class="answer">
+      Real-world intensities vary. Data-center cooling water spans roughly five-fold depending on
+      the cooling system; crop water depends on climate and irrigation. Every figure carries a low,
+      typical, and high estimate, and the range propagates through every comparison. A range is the
+      honest answer; a single number would imply a precision the underlying data does not have.
+    </p>
+  </details>
+
+  <details class="faq">
+    <summary>Is the Resource Ledger free?</summary>
+    <p class="answer">
+      Yes. It is free to use with no signup, every input is public, and the full dataset, sources,
+      and methodology are open.
+    </p>
+  </details>
+</section>
+
+<aside class="final-cta">
+  <h2>Open the live tool</h2>
+  <p>
+    Pick a user, pick a quantity, choose water or power, and see what it draws in the terms of
+    everything else — with the range and the sources in plain sight.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://ledger.mcmillinanalytics.com" rel="noopener">
+      Launch the ledger →
+    </a>
+  </div>
+</aside>
+
+<footer>
+  <div>© 2026 McMillin Analytics · John McMillin</div>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="https://github.com/mcmillinanalytics" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/johnmcmillin/" rel="noopener">LinkedIn</a>
+    <a href="mailto:mcmillinanalytics@gmail.com">Email</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
