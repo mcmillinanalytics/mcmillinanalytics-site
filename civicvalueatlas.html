@@ -14,6 +14,8 @@
 <meta property="og:description" content="A national county-level map. Weight the outcomes you care about, then see which counties beat or fall short of what their circumstances and spending would predict. Free, built on public data.">
 <meta property="og:url" content="https://mcmillinanalytics.com/civicvalueatlas">
 <meta property="og:image" content="https://mcmillinanalytics.com/screenshots/civic-value-atlas.png">
+<meta property="og:image:width" content="1897">
+<meta property="og:image:height" content="1071">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Is your county doing better or worse than you'd expect?">
@@ -64,26 +66,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What does the Civic Value Atlas show?",
+      "name": "Does it judge whether a county is well governed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It maps how every U.S. county is doing on the public outcomes people care about — schools, health, public safety, and economic mobility — and lets you weight those topics yourself. You can color the map two ways: by the raw outcomes (who's doing well), or by performance vs. expectations (who's doing better or worse than you'd expect given their circumstances and what they spend)."
+        "text": "No. The map describes results, not the quality of government. A county can come out above expected because of a strong local institution, a particular history, or a state program run from the capital — things the model can't see. Read a county's gap as \"it's doing better, or worse, than similar places,\" not as a grade on its leaders."
       }
     },
     {
       "@type": "Question",
-      "name": "What does \"performance vs. expectations\" mean?",
+      "name": "Does spending drive the results?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For each topic, a statistical model predicts how a county should score based on the things it can't change quickly — its size, density, how rural it is, its age mix, income, and child poverty — plus what it spends. The gap between a county's actual result and that prediction is the heart of the view: it surfaces counties that beat the expectations set by their circumstances, and ones that fall short."
+        "text": "Less than you might think. Across counties, how much a place spends explains surprisingly little of the difference in outcomes — a county's circumstances explain far more. That's exactly why the Performance view holds those circumstances steady and looks at what's left over."
       }
     },
     {
       "@type": "Question",
-      "name": "Where does the data come from, and is it free?",
+      "name": "Can I compare a county only to others in its state?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, it's free with no signup. Every number traces back to a public source: Census TIGER geography and the Census of Governments for spending, the Stanford Education Data Archive for schools, County Health Rankings and CDC PLACES for health, CDC and NCHS for safety, and the Census Bureau / Opportunity Insights Opportunity Atlas for economic mobility."
+        "text": "Yes. Flip \"compare across\" to \"your state only\" and every county is re-ranked against its in-state neighbors — 50 is the state middle, 0 is worst in the state, 100 is best. It's a useful lens because voters can change their own state's laws and school-funding rules, but not their neighbors'."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — free to use, no signup. Every input is public data, and the full methodology, sources, and limits are written out on the how-it-works page."
       }
     }
   ]

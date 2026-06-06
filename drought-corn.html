@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Which U.S. Corn Counties Are Most Exposed to Drought? · Drought Exposure Monitor</title>
+<title>Which U.S. Corn Counties Are Most Exposed to Drought? · U.S. Drought Exposure Monitor</title>
 
 <meta name="description" content="A county-level map of U.S. corn planted acres, federal crop insurance coverage gaps, and current drought severity. Refreshed weekly. Free and open-source.">
 <meta name="author" content="John McMillin">
@@ -300,6 +300,47 @@ section.prose a:hover { border-bottom-color: var(--accent); text-decoration: non
 .sources-table td:first-child { color: var(--text); font-weight: 500; }
 .sources-table tr:last-child td { border-bottom: none; }
 
+.crop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 20px 0 8px;
+}
+.crop-card {
+  display: block;
+  padding: 18px 18px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.crop-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: var(--surface-2);
+  text-decoration: none;
+}
+.crop-card .crop-name {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.crop-card .crop-meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.crop-card .crop-arrow {
+  color: var(--accent);
+  font-family: "JetBrains Mono", monospace;
+  margin-left: 4px;
+}
+
 details.faq {
   border-top: 1px solid var(--border);
   padding: 20px 0;
@@ -382,14 +423,14 @@ footer .links a:hover { color: var(--accent); }
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/">McMillin Analytics</a>
   <span class="sep">›</span>
-  <a href="/drought">Drought Exposure Monitor</a>
+  <a href="/drought">U.S. Drought Exposure Monitor</a>
   <span class="sep">›</span>
   <span>Corn</span>
 </nav>
 
 <header class="hero">
   <div class="eyebrow">
-    <span>Drought Exposure Monitor · Corn</span>
+    <span>U.S. Drought Exposure Monitor · Corn</span>
     <span class="live-badge"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
   </div>
   <h1>Which U.S. corn counties are most exposed to drought right now?</h1>
@@ -541,6 +582,32 @@ footer .links a:hover { color: var(--accent); }
       be wetter. The current week's view is on the live tool.
     </p>
   </details>
+</section>
+
+<section class="prose">
+  <h2>Other crops</h2>
+  <p>
+    Each crop has its own geography, its own typical coverage rate, and its own
+    drought-stress window — so the watch list for one rarely lines up with another.
+  </p>
+  <div class="crop-grid">
+    <a class="crop-card" href="/drought-soybeans">
+      <div class="crop-name">Soybeans <span class="crop-arrow">→</span></div>
+      <div class="crop-meta">~85M planted acres · Corn Belt + Delta</div>
+    </a>
+    <a class="crop-card" href="/drought-wheat">
+      <div class="crop-name">Wheat <span class="crop-arrow">→</span></div>
+      <div class="crop-meta">~45M planted acres · Plains, winter + spring</div>
+    </a>
+    <a class="crop-card" href="/drought-cotton">
+      <div class="crop-name">Cotton <span class="crop-arrow">→</span></div>
+      <div class="crop-meta">~10M planted acres · Texas-heavy</div>
+    </a>
+    <a class="crop-card" href="/drought-sorghum">
+      <div class="crop-name">Sorghum <span class="crop-arrow">→</span></div>
+      <div class="crop-meta">~6M planted acres · western Plains</div>
+    </a>
+  </div>
 </section>
 
 <aside class="final-cta">

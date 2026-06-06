@@ -66,42 +66,10 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Which U.S. counties have the lowest crop insurance coverage and are in drought?",
+      "name": "What is \"coverage gap\" on the map?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It changes weekly. The U.S. Drought Exposure Monitor identifies them by combining USDA RMA Summary of Business insured-acre data with the U.S. Drought Monitor's current severity map and USDA NASS planted-acre totals. As of the latest refresh, the highest-exposure clusters are typically in the Texas High Plains, the Mississippi Delta, and parts of the Pacific Northwest, where thin federal crop-insurance backstops coincide with active drought."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is 'coverage gap' on the map?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Coverage gap is the share of a county's planted acres that do not have a federal crop-insurance policy attached. It is calculated as 1 minus (RMA insured acres / NASS planted acres) for the most recent crop year. A coverage gap of 60% means roughly six out of every ten planted acres in that county had no federal insurance policy on file."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What data sources power the U.S. Drought Exposure Monitor?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "USDA NASS for planted acres at the county level; USDA RMA Summary of Business for insured acres by county and crop; the U.S. Drought Monitor for current drought severity (D0–D4); and NOAA's Climate Prediction Center for the 90-day Seasonal Drought Outlook. Every source is public and freely available."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How often is the data refreshed?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Drought severity and weather outlooks refresh every Thursday afternoon, a few hours after the U.S. Drought Monitor publishes its weekly map. RMA Summary of Business updates monthly mid-year and again at the close of the crop year. NASS planted-acre estimates promote from March prospective to June acreage to final, automatically, as USDA publishes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the U.S. Drought Exposure Monitor free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The tool is free to use with no signup, and the full source code and methodology are open source on GitHub under an open license."
+        "text": "Coverage gap is the share of a county's planted acres that do not have a federal crop-insurance policy attached. It is calculated as 1 − (RMA insured acres ÷ NASS planted acres) for the most recent crop year. A coverage gap of 60% means roughly six out of every ten planted acres in that county had no federal policy on file."
       }
     },
     {
@@ -109,7 +77,39 @@
       "name": "Why do some U.S. counties have such low federal crop insurance coverage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Federal crop-insurance participation varies by crop, region, and producer. Major row-crop counties in the Corn Belt tend to have high participation because corn and soybean policies are well-established. Coverage thins in counties dominated by specialty crops, mixed operations, or smaller producers, in regions where premiums are high relative to historical losses, and where private alternatives or self-insurance dominate. The Monitor highlights the counties where that thin coverage meets active drought."
+        "text": "Participation varies by crop, region, and producer. Major Corn Belt counties tend to be near-universal on corn and soybean policies. Coverage thins in counties dominated by specialty crops, in regions where premiums are high relative to historical losses, and where private alternatives or self-insurance dominate. The Monitor highlights the counties where that thin coverage meets active drought."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often is the data refreshed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Drought severity and the seasonal outlook refresh every Thursday afternoon, a few hours after the U.S. Drought Monitor publishes. RMA Summary of Business updates monthly mid-year and again at the close of the crop year. NASS planted-acre estimates promote from March prospective to June acreage to final, automatically, as USDA publishes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the U.S. Drought Exposure Monitor free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The tool is free to use with no signup, and the source code and methodology are open on GitHub."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which crops are covered?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The major federally insured row crops: corn, soybeans, wheat (excluding durum, which NASS does not publish at the county level under that series), cotton, and sorghum. These crops cover the bulk of insured U.S. acres."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the underlying data for my own analysis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every input is public USDA, NOAA, or U.S. Drought Monitor data, and the project links to each source. Attribution to the original federal sources is appreciated."
       }
     }
   ]
