@@ -402,6 +402,50 @@ footer .links a:hover { color: var(--accent); }
 
 <article class="project reveal">
   <div class="project-body">
+    <h2><a class="title-link" href="/drought">U.S. Drought Exposure Monitor</a></h2>
+    <div class="project-meta">
+      <span class="pill live"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
+    </div>
+    <div class="source-pills" aria-label="Data sources">
+      <span class="source-pill">USDA NASS</span>
+      <span class="source-pill">RMA SoB</span>
+      <span class="source-pill">U.S. Drought Monitor</span>
+      <span class="source-pill">NOAA CPC</span>
+    </div>
+    <p>
+      A county-level, 3D view of where drought meets federal crop-insurance
+      coverage across U.S. row crops — each county rises by its planted acres.
+      Combines USDA NASS, RMA, the U.S. Drought Monitor, and NOAA's CPC outlook
+      into one map and watch list. Refreshes weekly.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
+        Launch the monitor →
+      </a>
+    </div>
+    <a class="about-link" href="/drought">About the Drought Monitor →</a>
+  </div>
+  <div class="project-image">
+    <figure>
+      <img src="screenshots/map_exposure.png?v=5"
+           alt="3D relief map of the United States — each county rises by its planted acres and is colored by current drought severity, with the Midwest standing tallest.">
+      <figcaption>3D — each county's height is its planted acres, colored by current drought severity.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/scatter_drought_gap.png?v=3"
+           alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0–5, Y-axis is coverage gap 0–100%. Top-right cluster is the watch list.">
+      <figcaption>Drought severity × coverage gap, sized by planted acres — top-right is the watch list.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/map_drought_overtime.png?v=2"
+           alt="County-level map of the contiguous United States shaded by U.S. Drought Monitor severity for August 2012, when deep drought covered most of the central and western states. A timeline scrubber set to Aug 2012 sits below the map.">
+      <figcaption>Drought severity since 2000 — a play button animates the monthly record. Shown: the 2012 drought at its August peak.</figcaption>
+    </figure>
+  </div>
+</article>
+
+<article class="project reveal">
+  <div class="project-body">
     <h2><a class="title-link" href="/resource-ledger">Resource Ledger</a></h2>
     <div class="project-meta">
       <span class="pill live"><span class="live-dot"></span>Live</span>
@@ -505,50 +549,6 @@ footer .links a:hover { color: var(--accent); }
       <img src="screenshots/field-risk-atlas-parcel-detail.png"
            alt="Field Risk Atlas — nine California counties from Sonoma through the San Joaquin Valley, with agricultural parcels colored by water-risk band. A Tulare County pistachio parcel is selected, opening a side panel that reports a Severe risk band along with subbasin, GSP status, water-tier reliability, crop class, well depth, and 52-week drought exposure.">
       <figcaption>Click any parcel to see why — subbasin, GSP status, water tier, well depth, and drought exposure resolve into a single risk band across ~375,000 farmable parcels in nine California counties.</figcaption>
-    </figure>
-  </div>
-</article>
-
-<article class="project reveal">
-  <div class="project-body">
-    <h2><a class="title-link" href="/drought">U.S. Drought Exposure Monitor</a></h2>
-    <div class="project-meta">
-      <span class="pill live"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
-    </div>
-    <div class="source-pills" aria-label="Data sources">
-      <span class="source-pill">USDA NASS</span>
-      <span class="source-pill">RMA SoB</span>
-      <span class="source-pill">U.S. Drought Monitor</span>
-      <span class="source-pill">NOAA CPC</span>
-    </div>
-    <p>
-      A county-level, 3D view of where drought severity overlaps with thin
-      federal crop-insurance coverage across U.S. row crops — each county rises
-      by its planted acres. Combines USDA NASS, RMA, the U.S. Drought Monitor,
-      and NOAA's CPC outlook into one map and watch list. Refreshes weekly.
-    </p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
-        Launch the monitor →
-      </a>
-    </div>
-    <a class="about-link" href="/drought">About the Drought Monitor →</a>
-  </div>
-  <div class="project-image">
-    <figure>
-      <img src="screenshots/map_exposure.png?v=4"
-           alt="3D relief map of the United States — each county rises by its planted acres and is colored by current drought severity, with the Midwest standing tallest.">
-      <figcaption>3D relief — each county's height is its planted acres, colored by current drought severity.</figcaption>
-    </figure>
-    <figure>
-      <img src="screenshots/scatter_drought_gap.png?v=3"
-           alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0–5, Y-axis is coverage gap 0–100%. Top-right cluster — high drought, thin coverage — is the watch list.">
-      <figcaption>Drought severity × coverage gap, sized by planted acres — top-right is the watch list.</figcaption>
-    </figure>
-    <figure>
-      <img src="screenshots/map_drought_overtime.png?v=2"
-           alt="County-level map of the contiguous United States shaded by U.S. Drought Monitor severity for August 2012, when deep drought covered most of the central and western states. A timeline scrubber set to Aug 2012 sits below the map.">
-      <figcaption>Drought severity since 2000 — a play button animates the monthly record. Shown: the 2012 drought at its August peak.</figcaption>
     </figure>
   </div>
 </article>
