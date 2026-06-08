@@ -93,7 +93,7 @@
       "name": "Is the U.S. Drought Exposure Monitor free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The tool is free to use with no signup, and the source code and methodology are open on GitHub."
+        "text": "Yes. The tool is free to use with no signup, built entirely on public data."
       }
     },
     {
@@ -453,14 +453,11 @@ footer .links a:hover { color: var(--accent); }
     every week. Pick a crop, and it reads USDA's planted acres against current severity from the
     U.S. Drought Monitor and NOAA's 90-day outlook to rank every U.S. county by how much planted
     acreage is under active drought. Federal crop-insurance data rounds out each county as honest
-    context. Free, open-source, public-data only.
+    context. Free to use, public-data only.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
       Launch the monitor →
-    </a>
-    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">
-      Source on GitHub →
     </a>
   </div>
 </header>
@@ -619,9 +616,9 @@ footer .links a:hover { color: var(--accent); }
   <p>
     The Monitor shows a county's footprint across all federal crop-insurance programs —
     crop-insurance acres, grazing and forage acres, and rangeland — reported separately and
-    never summed, since a single field can carry more than one policy. The full methodology and source
-    are open on
-    <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
+    never summed, since a single field can carry more than one policy. The full methodology is
+    laid out on the
+    <a href="https://drought.mcmillinanalytics.com/about.html" rel="noopener">methodology page</a>.
   </p>
 </section>
 
@@ -666,9 +663,9 @@ footer .links a:hover { color: var(--accent); }
   <details class="faq">
     <summary>Is the U.S. Drought Exposure Monitor free?</summary>
     <p class="answer">
-      Yes. The tool is free to use with no signup, and the source code and methodology
-      are open on
-      <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
+      Yes. The tool is free to use with no signup. The full methodology
+      is laid out on the
+      <a href="https://drought.mcmillinanalytics.com/about.html" rel="noopener">methodology page</a>.
     </p>
   </details>
 
@@ -701,9 +698,6 @@ footer .links a:hover { color: var(--accent); }
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
       Launch the monitor →
     </a>
-    <a class="btn btn-secondary" href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">
-      Source on GitHub →
-    </a>
   </div>
 </aside>
 
@@ -711,7 +705,6 @@ footer .links a:hover { color: var(--accent); }
   <div>© 2026 McMillin Analytics · John McMillin</div>
   <div class="links">
     <a href="/">Home</a>
-    <a href="https://github.com/mcmillinanalytics" rel="noopener">GitHub</a>
     <a href="https://www.linkedin.com/in/johnmcmillin/" rel="noopener">LinkedIn</a>
     <a href="mailto:mcmillinanalytics@gmail.com">Email</a>
   </div>
@@ -723,14 +716,12 @@ footer .links a:hover { color: var(--accent); }
 (function () {
   var refresh = document.getElementById('refresh-text');
   if (!refresh) return;
-  fetch('https://api.github.com/repos/mcmillinanalytics/drought-exposure-tool/actions/workflows/refresh-data.yml/runs?status=success&per_page=1', {
-    headers: { 'Accept': 'application/vnd.github+json' }
-  })
+  fetch('https://drought.mcmillinanalytics.com/data/meta.json')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
-      var run = data && data.workflow_runs && data.workflow_runs[0];
-      if (!run) return;
-      var d = new Date(run.updated_at);
+      var ts = data && data.vintage && data.vintage.refreshed_at;
+      if (!ts) return;
+      var d = new Date(ts);
       if (isNaN(d.getTime())) return;
       var label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       refresh.textContent = 'Live · refreshed ' + label;
