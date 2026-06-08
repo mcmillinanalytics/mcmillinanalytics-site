@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Which U.S. Corn Counties Are Most Exposed to Drought? · U.S. Drought Exposure Monitor</title>
 
-<meta name="description" content="A county-level map of U.S. corn planted acres, federal crop insurance coverage gaps, and current drought severity. Refreshed weekly. Free and open-source.">
+<meta name="description" content="A county-level map of U.S. corn planted acres under current and forecast drought severity, with federal crop-insurance context. Refreshed weekly. Free and open-source.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/drought-corn">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which U.S. corn counties are most exposed to drought?">
-<meta property="og:description" content="A county-level view of corn planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Refreshed weekly.">
+<meta property="og:description" content="A county-level view of corn planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Refreshed weekly.">
 <meta property="og:url" content="https://mcmillinanalytics.com/drought-corn">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Which U.S. corn counties are most exposed to drought?">
-<meta name="twitter:description" content="Free, weekly county-level map of corn planted acres, federal crop insurance coverage, and drought severity.">
+<meta name="twitter:description" content="Free, weekly county-level map of corn planted acres under current and forecast drought severity, with federal crop-insurance context.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://drought.mcmillinanalytics.com/?crop=corn",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level view of U.S. corn planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Combines USDA NASS, RMA Summary of Business, and the U.S. Drought Monitor.",
+  "description": "County-level view of U.S. corn planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Combines USDA NASS, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -75,18 +75,18 @@
     },
     {
       "@type": "Question",
-      "name": "What is the typical federal crop insurance coverage rate for corn?",
+      "name": "How much U.S. corn is under drought right now?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Federal crop insurance participation for corn is among the highest of any U.S. row crop. In major Corn Belt counties, coverage rates around 85% of planted acres are common. Coverage rates thin in counties where corn is a secondary rotation crop, where producers rely on irrigation and self-insure against weather risk, or where premiums are high relative to historical losses."
+        "text": "It changes every week. The Drought Exposure Monitor reads current U.S. Drought Monitor severity against USDA NASS planted corn acres county by county, then ranks counties by drought-weighted acres — planted acres multiplied by severity. Because corn is the largest U.S. row crop by planted area, at roughly 90 million acres, even a moderate drought reading across the Corn Belt puts a large absolute acreage under stress. The current week's totals are on the live tool."
       }
     },
     {
       "@type": "Question",
-      "name": "Why does the corn coverage gap matter even when participation is high?",
+      "name": "Does the corn view account for federal crop insurance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Corn is the largest U.S. row crop by planted area — roughly 90 million acres each year. Even a single-digit coverage gap translates into millions of uninsured acres at that scale. When those uninsured corn acres concentrate in counties that are also currently in drought, the absolute exposure can outweigh thinner-coverage but lower-acreage regions for other crops."
+        "text": "The drought view is built on hard data only — planted corn acres from USDA NASS and current severity from the U.S. Drought Monitor — with no insurance assumptions. Federal crop insurance appears separately as per-county context drawn from USDA RMA's Summary of Business, showing the footprint across programs. Corn is among the most heavily insured U.S. row crops, so this context is steady; it is shown alongside the drought picture rather than folded into it."
       }
     },
     {
@@ -435,10 +435,10 @@ footer .links a:hover { color: var(--accent); }
   </div>
   <h1>Which U.S. corn counties are most exposed to drought right now?</h1>
   <p class="lede">
-    The <strong>U.S. Drought Exposure Monitor</strong> tracks roughly 90 million planted
-    corn acres against federal crop-insurance coverage and the U.S. Drought Monitor's
-    weekly severity map. The corn view is a county-by-county picture of where corn
-    ground sits under active drought without a federal insurance backstop —
+    The <strong>U.S. Drought Exposure Monitor</strong> maps roughly 90 million planted
+    corn acres against the U.S. Drought Monitor's weekly severity map. The corn view is
+    a county-by-county picture of where the most corn ground sits under active drought
+    right now, and where conditions are headed over the next three months —
     refreshed every Thursday.
   </p>
   <div class="cta-row">
@@ -453,8 +453,8 @@ footer .links a:hover { color: var(--accent); }
 
 <figure class="screenshot">
   <img src="screenshots/map-corn.webp?v=3"
-       alt="3D county-level map of U.S. corn drought exposure, where each county rises as a column scaled by how much corn ground sits in active drought without a federal insurance backstop. The western Corn Belt and parts of the southern Plains rise highest.">
-  <figcaption>Corn drought exposure by county — planted corn acres weighted by current U.S. Drought Monitor severity and federal crop-insurance coverage gap. Taller, darker columns carry more exposed corn acreage.</figcaption>
+       alt="3D county-level map of U.S. corn under drought, where each county rises as a column scaled by its planted corn acres and colored by current U.S. Drought Monitor severity. The western Corn Belt and parts of the southern Plains rise highest.">
+  <figcaption>Corn under drought by county — column height is planted corn acres, color is current U.S. Drought Monitor severity. Taller, darker columns carry more corn acreage under active drought.</figcaption>
 </figure>
 
 <section class="prose">
@@ -471,37 +471,42 @@ footer .links a:hover { color: var(--accent); }
     That concentration is why drought timing matters as much as drought severity for
     corn. A dry spell that hits the western Corn Belt in July — corn's pollination
     window — can move the national balance sheet in a way drought in a smaller-acreage
-    region cannot. The Monitor's exposure score reflects this scale effect: a severe
-    drought reading across a one-million-acre Iowa county weighs more heavily in the
-    national picture than the same severity reading in a small specialty-crop county.
+    region cannot. The Monitor's watch list reflects this scale effect: it ranks
+    counties by drought-weighted planted acres, so a severe drought reading across a
+    one-million-acre Iowa county weighs more heavily in the national picture than the
+    same severity reading in a small specialty-crop county.
   </p>
 </section>
 
 <section class="prose">
-  <h2>How drought exposure works for corn</h2>
+  <h2>How the corn view works</h2>
   <p>
-    Corn is one of the most heavily federally insured crops in the country. In major
-    Corn Belt counties, federal crop-insurance participation typically runs around 85%
-    of planted acres. At the national headline level, corn does not have a
-    coverage-rate problem.
+    The headline view shows planted corn acres as columns colored by current U.S.
+    Drought Monitor severity — hard data only, with no insurance assumptions. The watch
+    list ranks counties by drought-weighted planted acres: planted acres multiplied by
+    severity. A "Forecast Drought" view nudges current conditions by NOAA CPC's
+    Seasonal Drought Outlook to show where the next three months point, and a "vs Last
+    Year" view tracks the change in severity year over year.
   </p>
   <p>
-    The math still bites at scale. A roughly 10% gap on 90 million planted acres is
-    still nearly 9 million uninsured corn acres nationally. The Monitor surfaces where
-    those uninsured corn acres are clustered, and which of those clusters happen to be
-    in active drought this week.
+    Corn is one of the most heavily federally insured crops in the country — in major
+    Corn Belt counties, participation typically runs around 85% of planted acres — so
+    insurance is not the story for corn. Where it helps to know, the Monitor shows a
+    per-county footprint across all federal crop-insurance programs, with crop-insurance
+    acres, grazing and forage acres, and rangeland listed separately and never summed,
+    since a single field can carry more than one policy.
   </p>
   <p>
-    The exposure score is built the same way it is for every other crop: planted acres
-    from USDA NASS, insured acres from USDA RMA's Summary of Business, and current
-    drought severity from the U.S. Drought Monitor. The output is a single county-level
-    score, with corn surfaced on its own tab in the live tool.
+    The inputs are the same the rest of the tool uses: planted acres from USDA NASS,
+    current drought severity from the U.S. Drought Monitor, the NOAA CPC outlook for the
+    forecast view, and insurance context from USDA RMA's Summary of Business. Corn
+    appears on its own tab in the live tool.
   </p>
 </section>
 
 <section class="prose">
   <h2>Data sources for corn drought exposure</h2>
-  <p>Every input that drives the corn exposure score is public, free, and refreshed on a known cadence:</p>
+  <p>Every input behind the corn view is public, free, and refreshed on a known cadence:</p>
   <table class="sources-table">
     <thead>
       <tr>
@@ -518,7 +523,7 @@ footer .links a:hover { color: var(--accent); }
       </tr>
       <tr>
         <td>USDA RMA Summary of Business</td>
-        <td>Federally insured corn acres by county and coverage type</td>
+        <td>Per-county insurance context across all federal programs — crop insurance, grazing/forage, and rangeland shown separately</td>
         <td>Monthly mid-year + crop-year close</td>
       </tr>
       <tr>
@@ -551,24 +556,26 @@ footer .links a:hover { color: var(--accent); }
   </details>
 
   <details class="faq">
-    <summary>What is the typical federal crop insurance coverage rate for corn?</summary>
+    <summary>How much U.S. corn is under drought right now?</summary>
     <p class="answer">
-      Federal crop-insurance participation for corn is among the highest of any U.S.
-      row crop. In major Corn Belt counties, coverage rates around 85% of planted acres
-      are common. Coverage thins in counties where corn is a secondary rotation crop,
-      where producers rely on irrigation and self-insure against weather risk, or where
-      premiums are high relative to historical losses.
+      It changes every week. The Monitor reads current U.S. Drought Monitor severity
+      against USDA NASS planted corn acres county by county, then ranks counties by
+      drought-weighted acres — planted acres multiplied by severity. Because corn is the
+      largest U.S. row crop by planted area, at roughly 90 million acres, even a moderate
+      drought reading across the Corn Belt puts a large absolute acreage under stress.
+      The current week's totals are on the live tool.
     </p>
   </details>
 
   <details class="faq">
-    <summary>Why does the corn coverage gap matter even when participation is high?</summary>
+    <summary>Does the corn view account for federal crop insurance?</summary>
     <p class="answer">
-      Corn is the largest U.S. row crop by planted area — roughly 90 million acres each
-      year. Even a single-digit coverage gap translates into millions of uninsured acres
-      at that scale. When those uninsured corn acres concentrate in counties that are
-      also currently in drought, the absolute exposure can outweigh thinner-coverage
-      but lower-acreage regions for other crops.
+      The drought view is built on hard data only — planted corn acres from USDA NASS
+      and current severity from the U.S. Drought Monitor — with no insurance
+      assumptions. Federal crop insurance appears separately as per-county context drawn
+      from USDA RMA's Summary of Business, showing the footprint across programs. Corn is
+      among the most heavily insured U.S. row crops, so this context is steady; it is
+      shown alongside the drought picture rather than folded into it.
     </p>
   </details>
 
@@ -587,7 +594,7 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Other crops</h2>
   <p>
-    Each crop has its own geography, its own typical coverage rate, and its own
+    Each crop has its own geography, its own planted footprint, and its own
     drought-stress window — so the watch list for one rarely lines up with another.
   </p>
   <div class="crop-grid">

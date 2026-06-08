@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Which U.S. Cotton Counties Are Most Exposed to Drought? · U.S. Drought Exposure Monitor</title>
 
-<meta name="description" content="A county-level map of U.S. cotton planted acres, federal crop insurance coverage, and current drought severity. Texas-heavy. Refreshed weekly. Free and open-source.">
+<meta name="description" content="A county-level map of U.S. cotton planted acres under current and forecast drought severity, with federal crop-insurance context. Texas-heavy. Refreshed weekly. Free and open-source.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/drought-cotton">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which U.S. cotton counties are most exposed to drought?">
-<meta property="og:description" content="A county-level view of U.S. cotton planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Weighted heavily toward Texas High Plains drought.">
+<meta property="og:description" content="A county-level view of U.S. cotton planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Weighted heavily toward Texas High Plains drought.">
 <meta property="og:url" content="https://mcmillinanalytics.com/drought-cotton">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Which U.S. cotton counties are most exposed to drought?">
-<meta name="twitter:description" content="Free, weekly county-level map of cotton planted acres, federal crop insurance coverage, and drought severity.">
+<meta name="twitter:description" content="Free, weekly county-level map of cotton planted acres under current and forecast drought severity, with federal crop-insurance context.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://drought.mcmillinanalytics.com/?crop=cotton",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level view of U.S. cotton planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Combines USDA NASS, RMA Summary of Business, and the U.S. Drought Monitor.",
+  "description": "County-level view of U.S. cotton planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Combines USDA NASS, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -75,10 +75,10 @@
     },
     {
       "@type": "Question",
-      "name": "What is the typical federal crop insurance coverage rate for cotton?",
+      "name": "Does the cotton view account for federal crop insurance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Coverage rates are very high in dryland Texas High Plains cotton counties — cotton is one of the most widely insured row crops in Texas because the local economy is structurally exposed to drought and most producers carry layered coverage. Coverage varies more in the Southeast and Mid-South, where irrigation availability and producer-specific risk preferences shift participation rates."
+        "text": "The drought view is built on hard data only — planted cotton acres from USDA NASS and current severity from the U.S. Drought Monitor — with no insurance assumptions. Federal crop insurance appears separately as per-county context from USDA RMA's Summary of Business. Cotton is widely insured in the dryland Texas High Plains, where drought risk is structurally baked into the local economy, and participation varies more in the irrigated Southeast and Mid-South. The Monitor shows that footprint alongside the drought picture rather than folding it into the drought reading."
       }
     },
     {
@@ -435,11 +435,11 @@ footer .links a:hover { color: var(--accent); }
   </div>
   <h1>Which U.S. cotton counties are most exposed to drought right now?</h1>
   <p class="lede">
-    The <strong>U.S. Drought Exposure Monitor</strong> tracks roughly 10 million planted
-    cotton acres against federal crop-insurance coverage and the U.S. Drought Monitor's
-    weekly severity map. With more than half the national cotton crop grown in Texas,
-    the cotton view is weighted heavily toward Plains drought — refreshed every
-    Thursday.
+    The <strong>U.S. Drought Exposure Monitor</strong> maps roughly 10 million planted
+    cotton acres against the U.S. Drought Monitor's weekly severity map. With more than
+    half the national cotton crop grown in Texas, the cotton view is weighted heavily
+    toward Plains drought — showing where the most cotton ground sits under active
+    drought right now, and where conditions are headed — refreshed every Thursday.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com/?crop=cotton" rel="noopener">
@@ -453,8 +453,8 @@ footer .links a:hover { color: var(--accent); }
 
 <figure class="screenshot">
   <img src="screenshots/map-cotton.webp?v=3"
-       alt="3D county-level map of U.S. cotton drought exposure, dominated by Texas High Plains acreage, where each county rises as a column scaled by how much cotton ground sits in active drought without a federal insurance backstop.">
-  <figcaption>Cotton drought exposure by county — planted cotton acres weighted by current U.S. Drought Monitor severity and federal crop-insurance coverage gap. Taller, darker columns carry more exposed cotton acreage.</figcaption>
+       alt="3D county-level map of U.S. cotton under drought, dominated by Texas High Plains acreage, where each county rises as a column scaled by its planted cotton acres and colored by current U.S. Drought Monitor severity.">
+  <figcaption>Cotton under drought by county — column height is planted cotton acres, color is current U.S. Drought Monitor severity. Taller, darker columns carry more cotton acreage under active drought.</figcaption>
 </figure>
 
 <section class="prose">
@@ -472,21 +472,29 @@ footer .links a:hover { color: var(--accent); }
     That Texas concentration is why cotton drought analysis is largely Texas drought
     analysis. A Texas High Plains drought year can pull the entire U.S. cotton crop
     down even when conditions elsewhere are favorable. The Monitor shows this directly
-    on the cotton tab: when D2 or higher drought sits over the High Plains, the cotton
-    exposure score for those counties dominates the national watch list.
+    on the cotton tab: when D2 or higher drought sits over the High Plains, those
+    counties' drought-weighted cotton acres dominate the national watch list.
   </p>
 </section>
 
 <section class="prose">
-  <h2>How drought exposure works for cotton</h2>
+  <h2>How the cotton view works</h2>
   <p>
-    Federal crop-insurance participation for cotton is strong in Texas — RMA's
-    Multi-Peril Crop Insurance and stacked coverage products see heavy adoption on the
-    High Plains — and more variable in the Southeast and Mid-South. Coverage rates in
-    the dryland cotton counties of the Texas High Plains are very high; cotton is one
-    of the most widely insured row crops in Texas because the drought risk is
-    structurally baked into the local economy. Southeast irrigated cotton coverage is
-    more variable.
+    The headline view shows planted cotton acres as columns colored by current U.S.
+    Drought Monitor severity — hard data only, with no insurance assumptions. The watch
+    list ranks counties by drought-weighted planted acres: planted acres multiplied by
+    severity. A "Forecast Drought" view nudges current conditions by NOAA CPC's Seasonal
+    Drought Outlook to show where the next three months point, and a "vs Last Year" view
+    tracks the change in severity year over year.
+  </p>
+  <p>
+    Cotton is widely insured in the dryland Texas High Plains, where drought risk is
+    structurally baked into the local economy, and participation is more variable in the
+    irrigated Southeast and Mid-South — so insurance is steady where most of the crop
+    is. The Monitor keeps it as per-county context rather than building it into the
+    drought reading, showing the footprint across all federal programs with
+    crop-insurance acres, grazing and forage acres, and rangeland listed separately and
+    never summed, since a single field can carry more than one policy.
   </p>
   <p>
     One data caveat: USDA NASS sometimes publishes current-year cotton county data
@@ -495,15 +503,15 @@ footer .links a:hover { color: var(--accent); }
     of state cotton acreage, then promotes to county actuals when NASS publishes them.
   </p>
   <p>
-    The exposure score uses the same three inputs the rest of the tool does: planted
-    acres from USDA NASS, insured acres from USDA RMA's Summary of Business, and
-    current drought severity from the U.S. Drought Monitor.
+    The inputs are the same the rest of the tool uses: planted acres from USDA NASS,
+    current drought severity from the U.S. Drought Monitor, the NOAA CPC outlook for the
+    forecast view, and insurance context from USDA RMA's Summary of Business.
   </p>
 </section>
 
 <section class="prose">
   <h2>Data sources for cotton drought exposure</h2>
-  <p>Every input that drives the cotton exposure score is public, free, and refreshed on a known cadence:</p>
+  <p>Every input behind the cotton view is public, free, and refreshed on a known cadence:</p>
   <table class="sources-table">
     <thead>
       <tr>
@@ -520,7 +528,7 @@ footer .links a:hover { color: var(--accent); }
       </tr>
       <tr>
         <td>USDA RMA Summary of Business</td>
-        <td>Federally insured cotton acres by county and coverage type</td>
+        <td>Per-county insurance context across all federal programs — crop insurance, grazing/forage, and rangeland shown separately</td>
         <td>Monthly mid-year + crop-year close</td>
       </tr>
       <tr>
@@ -552,13 +560,16 @@ footer .links a:hover { color: var(--accent); }
   </details>
 
   <details class="faq">
-    <summary>What is the typical federal crop insurance coverage rate for cotton?</summary>
+    <summary>Does the cotton view account for federal crop insurance?</summary>
     <p class="answer">
-      Coverage rates are very high in dryland Texas High Plains cotton counties —
-      cotton is one of the most widely insured row crops in Texas because the local
-      economy is structurally exposed to drought and most producers carry layered
-      coverage. Coverage varies more in the Southeast and Mid-South, where irrigation
-      availability and producer-specific risk preferences shift participation rates.
+      The drought view is built on hard data only — planted cotton acres from USDA NASS
+      and current severity from the U.S. Drought Monitor — with no insurance
+      assumptions. Federal crop insurance appears separately as per-county context from
+      USDA RMA's Summary of Business. Cotton is widely insured in the dryland Texas High
+      Plains, where drought risk is structurally baked into the local economy, and
+      participation varies more in the irrigated Southeast and Mid-South. The Monitor
+      shows that footprint alongside the drought picture rather than folding it into the
+      drought reading.
     </p>
   </details>
 
@@ -588,7 +599,7 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Other crops</h2>
   <p>
-    Each crop has its own geography, its own typical coverage rate, and its own
+    Each crop has its own geography, its own planted footprint, and its own
     drought-stress window — so the watch list for one rarely lines up with another.
   </p>
   <div class="crop-grid">

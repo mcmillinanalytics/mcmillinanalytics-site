@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Which U.S. Sorghum Counties Are Most Exposed to Drought? · U.S. Drought Exposure Monitor</title>
 
-<meta name="description" content="A county-level map of U.S. sorghum planted acres, federal crop insurance coverage, and current drought severity across the western Plains. Refreshed weekly.">
+<meta name="description" content="A county-level map of U.S. sorghum planted acres under current and forecast drought severity, with federal crop-insurance context across the western Plains. Refreshed weekly.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/drought-sorghum">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which U.S. sorghum counties are most exposed to drought?">
-<meta property="og:description" content="A county-level view of U.S. sorghum planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity across Kansas, Texas, and the western Plains.">
+<meta property="og:description" content="A county-level view of U.S. sorghum planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context across Kansas, Texas, and the western Plains.">
 <meta property="og:url" content="https://mcmillinanalytics.com/drought-sorghum">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Which U.S. sorghum counties are most exposed to drought?">
-<meta name="twitter:description" content="Free, weekly county-level map of sorghum planted acres, federal crop insurance coverage, and drought severity.">
+<meta name="twitter:description" content="Free, weekly county-level map of sorghum planted acres under current and forecast drought severity, with federal crop-insurance context.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://drought.mcmillinanalytics.com/?crop=sorghum",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level view of U.S. sorghum planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Combines USDA NASS, RMA Summary of Business, and the U.S. Drought Monitor.",
+  "description": "County-level view of U.S. sorghum planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Combines USDA NASS, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -75,10 +75,10 @@
     },
     {
       "@type": "Question",
-      "name": "What is the typical federal crop insurance coverage rate for sorghum?",
+      "name": "Does a grain-insurance figure capture how much sorghum ground is insured against drought?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Coverage varies. In major sorghum states — western Kansas and the Texas High Plains in particular — federal crop-insurance participation is generally strong. In states where sorghum is a smaller secondary or rotation crop, coverage rates are typically lower than for corn or soybeans, and producers more often rely on alternative coverage products or self-insure."
+        "text": "Not on its own. Across the grazing-heavy western Plains, a meaningful share of small-grain and forage acreage is insured as forage rather than grain — through Annual Forage or Pasture, Rangeland and Forage policies that cover the same ground against drought. Sorghum is also grown as forage and grazed in much of this region. A grain-only coverage figure therefore understates true insurance against drought. The Monitor shows federal crop insurance as honest per-county context across all programs — crop insurance, grazing and forage, and rangeland listed separately and never summed."
       }
     },
     {
@@ -435,11 +435,12 @@ footer .links a:hover { color: var(--accent); }
   </div>
   <h1>Which U.S. sorghum counties are most exposed to drought right now?</h1>
   <p class="lede">
-    The <strong>U.S. Drought Exposure Monitor</strong> tracks roughly 6 million planted
-    sorghum acres against federal crop-insurance coverage and the U.S. Drought Monitor's
-    weekly severity map. Sorghum is the drought-tolerant grain crop of the western
-    Plains, so the sorghum view is built around the same regions where drought risk is
-    structurally highest — refreshed every Thursday.
+    The <strong>U.S. Drought Exposure Monitor</strong> maps roughly 6 million planted
+    sorghum acres against the U.S. Drought Monitor's weekly severity map. Sorghum is the
+    drought-tolerant grain crop of the western Plains, so the sorghum view is built
+    around the same regions where drought risk is structurally highest — showing where
+    the most sorghum ground sits under active drought right now, and where conditions
+    are headed — refreshed every Thursday.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com/?crop=sorghum" rel="noopener">
@@ -453,8 +454,8 @@ footer .links a:hover { color: var(--accent); }
 
 <figure class="screenshot">
   <img src="screenshots/map-sorghum.webp?v=3"
-       alt="3D county-level map of U.S. sorghum drought exposure across western Kansas, the Texas High Plains, and the eastern Colorado plains, where each county rises as a column scaled by how much sorghum ground sits in active drought without a federal insurance backstop.">
-  <figcaption>Sorghum drought exposure by county — planted sorghum acres weighted by current U.S. Drought Monitor severity and federal crop-insurance coverage gap. Taller, darker columns carry more exposed sorghum acreage.</figcaption>
+       alt="3D county-level map of U.S. sorghum under drought across western Kansas, the Texas High Plains, and the eastern Colorado plains, where each county rises as a column scaled by its planted sorghum acres and colored by current U.S. Drought Monitor severity.">
+  <figcaption>Sorghum under drought by county — column height is planted sorghum acres, color is current U.S. Drought Monitor severity. Taller, darker columns carry more sorghum acreage under active drought.</figcaption>
 </figure>
 
 <section class="prose">
@@ -479,32 +480,44 @@ footer .links a:hover { color: var(--accent); }
 </section>
 
 <section class="prose">
-  <h2>How drought exposure works for sorghum</h2>
+  <h2>How the sorghum view works</h2>
   <p>
-    Federal crop-insurance participation for sorghum is moderate and varies by region.
-    In western Kansas and the Texas High Plains, where sorghum is the primary or
-    co-primary grain, MPCI coverage rates are generally strong but not at Corn Belt
-    levels. In secondary sorghum states, coverage tends to be thinner — sorghum
-    producers in those regions often grow it as part of a rotation rather than as a
-    primary crop, and may rely on alternative coverage products.
+    The headline view shows planted sorghum acres as columns colored by current U.S.
+    Drought Monitor severity — hard data only, with no insurance assumptions. The watch
+    list ranks counties by drought-weighted planted acres: planted acres multiplied by
+    severity. A "Forecast Drought" view nudges current conditions by NOAA CPC's Seasonal
+    Drought Outlook to show where the next three months point, and a "vs Last Year" view
+    tracks the change in severity year over year.
+  </p>
+  <p>
+    Insurance is nuanced across the grazing-heavy western Plains, which is why the
+    Monitor keeps it as context rather than building it into the drought reading. A
+    meaningful share of small-grain and forage acreage in this region is insured as
+    forage rather than grain — through Annual Forage or Pasture, Rangeland and Forage
+    policies that cover the same ground against drought — and sorghum itself is often
+    grown as forage and grazed. A grain-only coverage figure therefore understates how
+    much of this ground is actually insured against drought. The Monitor shows the full
+    per-county footprint across all federal programs, with crop-insurance acres, grazing
+    and forage acres, and rangeland listed separately and never summed, since a single
+    field can carry more than one policy.
   </p>
   <p>
     Sorghum's drought tolerance is a real agronomic feature, but it is not unlimited.
-    D3 or D4 severity in a county where sorghum is the primary crop still drives yield
-    losses and triggers insurance indemnities. The Monitor scores sorghum on the same
-    axes it uses for every other crop, so the exposure number is comparable across
-    crops even when the underlying agronomy is not.
+    Severe drought in a county where sorghum is the primary crop still drives yield
+    losses. The Monitor reads sorghum on the same axes it uses for every other crop, so
+    the drought picture is comparable across crops even when the underlying agronomy is
+    not.
   </p>
   <p>
-    The exposure score uses the same three inputs the rest of the tool does: planted
-    acres from USDA NASS, insured acres from USDA RMA's Summary of Business, and
-    current drought severity from the U.S. Drought Monitor.
+    The inputs are the same the rest of the tool uses: planted acres from USDA NASS,
+    current drought severity from the U.S. Drought Monitor, the NOAA CPC outlook for the
+    forecast view, and insurance context from USDA RMA's Summary of Business.
   </p>
 </section>
 
 <section class="prose">
   <h2>Data sources for sorghum drought exposure</h2>
-  <p>Every input that drives the sorghum exposure score is public, free, and refreshed on a known cadence:</p>
+  <p>Every input behind the sorghum view is public, free, and refreshed on a known cadence:</p>
   <table class="sources-table">
     <thead>
       <tr>
@@ -521,7 +534,7 @@ footer .links a:hover { color: var(--accent); }
       </tr>
       <tr>
         <td>USDA RMA Summary of Business</td>
-        <td>Federally insured sorghum acres by county and coverage type</td>
+        <td>Per-county insurance context across all federal programs — crop insurance, grazing/forage, and rangeland shown separately</td>
         <td>Monthly mid-year + crop-year close</td>
       </tr>
       <tr>
@@ -552,13 +565,16 @@ footer .links a:hover { color: var(--accent); }
   </details>
 
   <details class="faq">
-    <summary>What is the typical federal crop insurance coverage rate for sorghum?</summary>
+    <summary>Does a grain-insurance figure capture how much sorghum ground is insured against drought?</summary>
     <p class="answer">
-      Coverage varies. In major sorghum states — western Kansas and the Texas High
-      Plains in particular — federal crop-insurance participation is generally strong.
-      In states where sorghum is a smaller secondary or rotation crop, coverage rates
-      are typically lower than for corn or soybeans, and producers more often rely on
-      alternative coverage products or self-insure.
+      Not on its own. Across the grazing-heavy western Plains, a meaningful share of
+      small-grain and forage acreage is insured as forage rather than grain — through
+      Annual Forage or Pasture, Rangeland and Forage policies that cover the same ground
+      against drought. Sorghum is also grown as forage and grazed in much of this
+      region. A grain-only coverage figure therefore understates true insurance against
+      drought. The Monitor shows federal crop insurance as honest per-county context
+      across all programs — crop insurance, grazing and forage, and rangeland listed
+      separately and never summed.
     </p>
   </details>
 
@@ -588,7 +604,7 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Other crops</h2>
   <p>
-    Each crop has its own geography, its own typical coverage rate, and its own
+    Each crop has its own geography, its own planted footprint, and its own
     drought-stress window — so the watch list for one rarely lines up with another.
   </p>
   <div class="crop-grid">

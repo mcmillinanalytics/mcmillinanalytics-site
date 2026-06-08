@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Which U.S. Wheat Counties Are Most Exposed to Drought? · U.S. Drought Exposure Monitor</title>
 
-<meta name="description" content="A county-level map of U.S. wheat planted acres, federal crop insurance coverage gaps, and current drought severity. Winter and spring wheat. Refreshed weekly.">
+<meta name="description" content="A county-level map of U.S. wheat planted acres under current and forecast drought severity, with federal crop-insurance context. Winter and spring wheat. Refreshed weekly.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/drought-wheat">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which U.S. wheat counties are most exposed to drought?">
-<meta property="og:description" content="A county-level view of U.S. wheat planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity across winter and spring wheat regions.">
+<meta property="og:description" content="A county-level view of U.S. wheat planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context across winter and spring wheat regions.">
 <meta property="og:url" content="https://mcmillinanalytics.com/drought-wheat">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Which U.S. wheat counties are most exposed to drought?">
-<meta name="twitter:description" content="Free, weekly county-level map of wheat planted acres, federal crop insurance coverage, and drought severity.">
+<meta name="twitter:description" content="Free, weekly county-level map of wheat planted acres under current and forecast drought severity, with federal crop-insurance context.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://drought.mcmillinanalytics.com/?crop=wheat",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level view of U.S. wheat planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity across winter and spring wheat regions. Combines USDA NASS, RMA Summary of Business, and the U.S. Drought Monitor.",
+  "description": "County-level view of U.S. wheat planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context across winter and spring wheat regions. Combines USDA NASS, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -75,10 +75,10 @@
     },
     {
       "@type": "Question",
-      "name": "What is the typical federal crop insurance coverage rate for wheat?",
+      "name": "Does a grain-insurance figure capture how much wheat is insured against drought?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Coverage varies more for wheat than for corn or soybeans. In Kansas and the major winter-wheat Plains states, federal crop-insurance participation often runs around 80% of planted acres. Coverage tends to thin in states where wheat is a secondary crop, in counties with high premiums relative to historical losses, and where producers use alternative coverage products."
+        "text": "Not on its own. A large share of grazing-capable wheat acreage is insured as forage rather than grain. Under the dual-use practice common in the Southern Plains, winter wheat is grazed by cattle over the winter and then either harvested for grain or grazed out entirely, and that ground is often covered by Annual Forage or Pasture, Rangeland and Forage policies instead of a grain policy. A grain-only coverage figure therefore understates true insurance against drought. The Monitor shows federal crop insurance as honest per-county context across all programs — crop insurance, grazing and forage, and rangeland listed separately and never summed."
       }
     },
     {
@@ -435,11 +435,11 @@ footer .links a:hover { color: var(--accent); }
   </div>
   <h1>Which U.S. wheat counties are most exposed to drought right now?</h1>
   <p class="lede">
-    The <strong>U.S. Drought Exposure Monitor</strong> tracks roughly 45 million planted
-    wheat acres against federal crop-insurance coverage and the U.S. Drought Monitor's
-    weekly severity map. The wheat view covers both winter-wheat country in the
-    Southern and Central Plains and spring-wheat country in the Northern Plains —
-    refreshed every Thursday.
+    The <strong>U.S. Drought Exposure Monitor</strong> maps roughly 45 million planted
+    wheat acres against the U.S. Drought Monitor's weekly severity map. The wheat view
+    shows where the most wheat ground sits under active drought right now, and where
+    conditions are headed — across both winter-wheat country in the Southern and Central
+    Plains and spring-wheat country in the Northern Plains — refreshed every Thursday.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com/?crop=wheat" rel="noopener">
@@ -453,8 +453,8 @@ footer .links a:hover { color: var(--accent); }
 
 <figure class="screenshot">
   <img src="screenshots/map-wheat.webp?v=3"
-       alt="3D county-level map of U.S. wheat drought exposure across both winter-wheat country in the Southern and Central Plains and spring-wheat country in the Northern Plains, where each county rises as a column scaled by how much wheat ground sits in active drought without a federal insurance backstop.">
-  <figcaption>Wheat drought exposure by county — planted wheat acres weighted by current U.S. Drought Monitor severity and federal crop-insurance coverage gap. Taller, darker columns carry more exposed wheat acreage.</figcaption>
+       alt="3D county-level map of U.S. wheat under drought across both winter-wheat country in the Southern and Central Plains and spring-wheat country in the Northern Plains, where each county rises as a column scaled by its planted wheat acres and colored by current U.S. Drought Monitor severity.">
+  <figcaption>Wheat under drought by county — column height is planted wheat acres, color is current U.S. Drought Monitor severity. Taller, darker columns carry more wheat acreage under active drought.</figcaption>
 </figure>
 
 <section class="prose">
@@ -480,14 +480,28 @@ footer .links a:hover { color: var(--accent); }
 </section>
 
 <section class="prose">
-  <h2>How drought exposure works for wheat</h2>
+  <h2>How the wheat view works</h2>
   <p>
-    Federal crop-insurance participation for wheat is more variable than for corn or
-    soybeans. In the major winter-wheat states — Kansas in particular — coverage rates
-    can rival corn's, generally running around 80% of planted acres. Spring-wheat
-    states tend to show similar participation. Coverage thins in states where wheat is
-    a smaller secondary crop or where producers grow it on uninsured or self-insured
-    ground.
+    The headline view shows planted wheat acres as columns colored by current U.S.
+    Drought Monitor severity — hard data only, with no insurance assumptions. The watch
+    list ranks counties by drought-weighted planted acres: planted acres multiplied by
+    severity. A "Forecast Drought" view nudges current conditions by NOAA CPC's Seasonal
+    Drought Outlook to show where the next three months point, and a "vs Last Year" view
+    tracks the change in severity year over year.
+  </p>
+  <p>
+    Insurance is more nuanced for wheat than for the row crops, which is why the Monitor
+    keeps it as context rather than building it into the drought reading. A large share
+    of grazing-capable wheat acreage is insured as forage rather than grain. Under the
+    dual-use practice common in the Southern Plains, winter wheat is grazed by cattle
+    over the winter and then either harvested for grain or grazed out entirely, and that
+    ground is often covered by Annual Forage or Pasture, Rangeland and Forage policies
+    instead of a grain policy. A grain-only coverage figure therefore understates how
+    much wheat ground is actually insured against drought — a county can look lightly
+    covered on grain while being heavily covered through forage. The Monitor shows the
+    full per-county footprint across all federal programs, with crop-insurance acres,
+    grazing and forage acres, and rangeland listed separately and never summed, since a
+    single field can carry more than one policy.
   </p>
   <p>
     One caveat about the wheat view: USDA NASS does not publish durum wheat at the
@@ -497,15 +511,15 @@ footer .links a:hover { color: var(--accent); }
     soft white, and other classes — is present.
   </p>
   <p>
-    The exposure score uses the same three inputs the rest of the tool does: planted
-    acres from USDA NASS, insured acres from USDA RMA's Summary of Business, and
-    current drought severity from the U.S. Drought Monitor.
+    The inputs are the same the rest of the tool uses: planted acres from USDA NASS,
+    current drought severity from the U.S. Drought Monitor, the NOAA CPC outlook for the
+    forecast view, and insurance context from USDA RMA's Summary of Business.
   </p>
 </section>
 
 <section class="prose">
   <h2>Data sources for wheat drought exposure</h2>
-  <p>Every input that drives the wheat exposure score is public, free, and refreshed on a known cadence:</p>
+  <p>Every input behind the wheat view is public, free, and refreshed on a known cadence:</p>
   <table class="sources-table">
     <thead>
       <tr>
@@ -522,7 +536,7 @@ footer .links a:hover { color: var(--accent); }
       </tr>
       <tr>
         <td>USDA RMA Summary of Business</td>
-        <td>Federally insured wheat acres by county and coverage type</td>
+        <td>Per-county insurance context across all federal programs — crop insurance, grazing/forage, and rangeland shown separately</td>
         <td>Monthly mid-year + crop-year close</td>
       </tr>
       <tr>
@@ -554,14 +568,17 @@ footer .links a:hover { color: var(--accent); }
   </details>
 
   <details class="faq">
-    <summary>What is the typical federal crop insurance coverage rate for wheat?</summary>
+    <summary>Does a grain-insurance figure capture how much wheat is insured against drought?</summary>
     <p class="answer">
-      Coverage varies more for wheat than for corn or soybeans. In Kansas and the major
-      winter-wheat Plains states, federal crop-insurance participation often runs
-      around 80% of planted acres. Coverage tends to thin in states where wheat is a
-      secondary
-      crop, in counties with high premiums relative to historical losses, and where
-      producers use alternative coverage products.
+      Not on its own. A large share of grazing-capable wheat acreage is insured as
+      forage rather than grain. Under the dual-use practice common in the Southern
+      Plains, winter wheat is grazed by cattle over the winter and then either harvested
+      for grain or grazed out entirely, and that ground is often covered by Annual
+      Forage or Pasture, Rangeland and Forage policies instead of a grain policy. A
+      grain-only coverage figure therefore understates true insurance against drought.
+      The Monitor shows federal crop insurance as honest per-county context across all
+      programs — crop insurance, grazing and forage, and rangeland listed separately and
+      never summed.
     </p>
   </details>
 
@@ -591,7 +608,7 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Other crops</h2>
   <p>
-    Each crop has its own geography, its own typical coverage rate, and its own
+    Each crop has its own geography, its own planted footprint, and its own
     drought-stress window — so the watch list for one rarely lines up with another.
   </p>
   <div class="crop-grid">

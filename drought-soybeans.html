@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Which U.S. Soybean Counties Are Most Exposed to Drought? · U.S. Drought Exposure Monitor</title>
 
-<meta name="description" content="A county-level map of U.S. soybean planted acres, federal crop insurance coverage gaps, and current drought severity. Refreshed weekly. Free and open-source.">
+<meta name="description" content="A county-level map of U.S. soybean planted acres under current and forecast drought severity, with federal crop-insurance context. Refreshed weekly. Free and open-source.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/drought-soybeans">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Which U.S. soybean counties are most exposed to drought?">
-<meta property="og:description" content="A county-level view of soybean planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Refreshed weekly.">
+<meta property="og:description" content="A county-level view of soybean planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Refreshed weekly.">
 <meta property="og:url" content="https://mcmillinanalytics.com/drought-soybeans">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
@@ -19,7 +19,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Which U.S. soybean counties are most exposed to drought?">
-<meta name="twitter:description" content="Free, weekly county-level map of soybean planted acres, federal crop insurance coverage, and drought severity.">
+<meta name="twitter:description" content="Free, weekly county-level map of soybean planted acres under current and forecast drought severity, with federal crop-insurance context.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://drought.mcmillinanalytics.com/?crop=soybeans",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level view of U.S. soybean planted acres, federal crop insurance coverage, and current U.S. Drought Monitor severity. Combines USDA NASS, RMA Summary of Business, and the U.S. Drought Monitor.",
+  "description": "County-level view of U.S. soybean planted acres under current and forecast U.S. Drought Monitor severity, with federal crop-insurance context. Combines USDA NASS, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -75,10 +75,10 @@
     },
     {
       "@type": "Question",
-      "name": "What is the typical federal crop insurance coverage rate for soybeans?",
+      "name": "Does the soybean view account for federal crop insurance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Coverage rates for soybeans are among the highest of any U.S. row crop, on par with corn. In major Corn Belt and Delta states, federal crop-insurance participation regularly runs around 85% of planted acres. Coverage thins in states where soybeans are a smaller secondary crop, and in counties where producers prefer alternative private products or self-insure against weather risk."
+        "text": "The drought view is built on hard data only — planted soybean acres from USDA NASS and current severity from the U.S. Drought Monitor — with no insurance assumptions. Federal crop insurance appears separately as per-county context from USDA RMA's Summary of Business. Soybeans are among the most heavily insured U.S. row crops, on par with corn, so this context is steady; it is shown alongside the drought picture rather than folded into it."
       }
     },
     {
@@ -435,11 +435,11 @@ footer .links a:hover { color: var(--accent); }
   </div>
   <h1>Which U.S. soybean counties are most exposed to drought right now?</h1>
   <p class="lede">
-    The <strong>U.S. Drought Exposure Monitor</strong> tracks roughly 85 million planted
-    soybean acres against federal crop-insurance coverage and the U.S. Drought Monitor's
-    weekly severity map. The soybean view is a county-by-county picture of where
-    soybean ground sits under active drought without a federal insurance backstop —
-    refreshed every Thursday.
+    The <strong>U.S. Drought Exposure Monitor</strong> maps roughly 85 million planted
+    soybean acres against the U.S. Drought Monitor's weekly severity map. The soybean
+    view is a county-by-county picture of where the most soybean ground sits under
+    active drought right now, and where conditions are headed over the next three
+    months — refreshed every Thursday.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com/?crop=soybeans" rel="noopener">
@@ -453,8 +453,8 @@ footer .links a:hover { color: var(--accent); }
 
 <figure class="screenshot">
   <img src="screenshots/map-soybeans.webp?v=3"
-       alt="3D county-level map of U.S. soybean drought exposure spanning the Corn Belt and the Mississippi Delta, where each county rises as a column scaled by how much soybean ground sits in active drought without a federal insurance backstop.">
-  <figcaption>Soybean drought exposure by county — planted soybean acres weighted by current U.S. Drought Monitor severity and federal crop-insurance coverage gap. Taller, darker columns carry more exposed soybean acreage.</figcaption>
+       alt="3D county-level map of U.S. soybeans under drought spanning the Corn Belt and the Mississippi Delta, where each county rises as a column scaled by its planted soybean acres and colored by current U.S. Drought Monitor severity.">
+  <figcaption>Soybeans under drought by county — column height is planted soybean acres, color is current U.S. Drought Monitor severity. Taller, darker columns carry more soybean acreage under active drought.</figcaption>
 </figure>
 
 <section class="prose">
@@ -478,31 +478,34 @@ footer .links a:hover { color: var(--accent); }
 </section>
 
 <section class="prose">
-  <h2>How drought exposure works for soybeans</h2>
+  <h2>How the soybean view works</h2>
   <p>
-    Like corn, soybeans are heavily covered by federal crop insurance. In the major
-    soybean states — Illinois, Iowa, Minnesota, North Dakota, Indiana, Missouri,
-    Nebraska — participation runs at or near corn levels, typically around 85% of
-    planted acres. At the national headline level, soybeans do not have a
-    coverage-rate problem.
+    The headline view shows planted soybean acres as columns colored by current U.S.
+    Drought Monitor severity — hard data only, with no insurance assumptions. The watch
+    list ranks counties by drought-weighted planted acres: planted acres multiplied by
+    severity. A "Forecast Drought" view nudges current conditions by NOAA CPC's
+    Seasonal Drought Outlook to show where the next three months point, and a "vs Last
+    Year" view tracks the change in severity year over year.
   </p>
   <p>
-    The math still bites at scale. A modest gap on an 85-million-acre planted base
-    leaves several million uninsured soybean acres nationally. The Monitor highlights
-    where those uninsured soybean acres are clustered and which of those clusters are
-    in active drought this week.
+    Like corn, soybeans are heavily covered by federal crop insurance — in the major
+    soybean states, participation runs at or near corn levels — so insurance is not the
+    story for soybeans. Where it helps to know, the Monitor shows a per-county footprint
+    across all federal crop-insurance programs, with crop-insurance acres, grazing and
+    forage acres, and rangeland listed separately and never summed, since a single field
+    can carry more than one policy.
   </p>
   <p>
-    The exposure score uses the same three inputs the rest of the tool does: planted
-    acres from USDA NASS, insured acres from USDA RMA's Summary of Business, and
-    current drought severity from the U.S. Drought Monitor. Soybeans appear on their
-    own tab in the live tool.
+    The inputs are the same the rest of the tool uses: planted acres from USDA NASS,
+    current drought severity from the U.S. Drought Monitor, the NOAA CPC outlook for the
+    forecast view, and insurance context from USDA RMA's Summary of Business. Soybeans
+    appear on their own tab in the live tool.
   </p>
 </section>
 
 <section class="prose">
   <h2>Data sources for soybean drought exposure</h2>
-  <p>Every input that drives the soybean exposure score is public, free, and refreshed on a known cadence:</p>
+  <p>Every input behind the soybean view is public, free, and refreshed on a known cadence:</p>
   <table class="sources-table">
     <thead>
       <tr>
@@ -519,7 +522,7 @@ footer .links a:hover { color: var(--accent); }
       </tr>
       <tr>
         <td>USDA RMA Summary of Business</td>
-        <td>Federally insured soybean acres by county and coverage type</td>
+        <td>Per-county insurance context across all federal programs — crop insurance, grazing/forage, and rangeland shown separately</td>
         <td>Monthly mid-year + crop-year close</td>
       </tr>
       <tr>
@@ -551,13 +554,14 @@ footer .links a:hover { color: var(--accent); }
   </details>
 
   <details class="faq">
-    <summary>What is the typical federal crop insurance coverage rate for soybeans?</summary>
+    <summary>Does the soybean view account for federal crop insurance?</summary>
     <p class="answer">
-      Coverage rates for soybeans are among the highest of any U.S. row crop, on par
-      with corn. In major Corn Belt and Delta states, federal crop-insurance
-      participation regularly runs around 85% of planted acres. Coverage thins in
-      states where soybeans are a smaller secondary crop, and in counties where
-      producers prefer alternative private products or self-insure against weather risk.
+      The drought view is built on hard data only — planted soybean acres from USDA NASS
+      and current severity from the U.S. Drought Monitor — with no insurance
+      assumptions. Federal crop insurance appears separately as per-county context from
+      USDA RMA's Summary of Business. Soybeans are among the most heavily insured U.S.
+      row crops, on par with corn, so this context is steady; it is shown alongside the
+      drought picture rather than folded into it.
     </p>
   </details>
 
@@ -586,7 +590,7 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Other crops</h2>
   <p>
-    Each crop has its own geography, its own typical coverage rate, and its own
+    Each crop has its own geography, its own planted footprint, and its own
     drought-stress window — so the watch list for one rarely lines up with another.
   </p>
   <div class="crop-grid">

@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Which U.S. Counties Have the Lowest Crop Insurance Coverage in Drought? · U.S. Drought Exposure Monitor</title>
+<title>Which U.S. Counties Have the Most Crop Acreage in Drought? · U.S. Drought Exposure Monitor</title>
 
-<meta name="description" content="A free, interactive county-level map of where U.S. drought severity overlaps with thin federal crop insurance coverage. Filter by state and crop. Combines USDA NASS planted acres, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC outlook. Refreshed weekly.">
+<meta name="description" content="A free, interactive county-level map of which U.S. counties have the most planted acreage under active drought. Filter by state and crop. Combines USDA NASS planted acres, the U.S. Drought Monitor, and NOAA CPC outlook, with federal crop-insurance data as per-county context. Refreshed weekly.">
 <meta name="author" content="John McMillin">
 <link rel="canonical" href="https://mcmillinanalytics.com/drought">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Which U.S. counties have the lowest crop insurance coverage in drought?">
-<meta property="og:description" content="A free, county-level dataset combining USDA NASS planted acres, RMA Summary of Business, the U.S. Drought Monitor, and NOAA CPC outlook. Refreshed weekly.">
+<meta property="og:title" content="Which U.S. counties have the most crop acreage in drought?">
+<meta property="og:description" content="A free, county-level dataset combining USDA NASS planted acres, the U.S. Drought Monitor, and NOAA CPC outlook, with federal crop-insurance data as per-county context. Refreshed weekly.">
 <meta property="og:url" content="https://mcmillinanalytics.com/drought">
 <meta property="og:image" content="https://mcmillinanalytics.com/og-card.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Which U.S. counties have the lowest crop insurance coverage in drought?">
-<meta name="twitter:description" content="Free, weekly county-level map of uninsured drought exposure across U.S. row crops.">
+<meta name="twitter:title" content="Which U.S. counties have the most crop acreage in drought?">
+<meta name="twitter:description" content="Free, weekly county-level map of drought exposure across U.S. row crops — planted acreage under active drought.">
 <meta name="twitter:image" content="https://mcmillinanalytics.com/og-card.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -38,7 +38,7 @@
   "url": "https://drought.mcmillinanalytics.com",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level dashboard combining USDA NASS planted acres, RMA Summary of Business insured acres, the U.S. Drought Monitor, and NOAA's CPC seasonal outlook to surface where federal crop-insurance coverage is thin in counties currently in drought.",
+  "description": "County-level dashboard combining USDA NASS planted acres, the U.S. Drought Monitor, and NOAA's CPC seasonal outlook to show which counties have the most planted acreage under active drought, with federal crop-insurance data shown as per-county context.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -66,18 +66,18 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is \"coverage gap\" on the map?",
+      "name": "How does the watch list rank counties?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Coverage gap is the share of a county's planted acres that do not have a federal crop-insurance policy attached. It is calculated as 1 − (RMA insured acres ÷ NASS planted acres) for the most recent crop year. A coverage gap of 60% means roughly six out of every ten planted acres in that county had no federal policy on file."
+        "text": "The watch list ranks counties by drought-weighted planted acres — each county's planted acreage multiplied by its current U.S. Drought Monitor severity. Counties with both a lot of planted acreage and deep drought rise to the top. The ranking uses hard data only: USDA NASS planted acres and U.S. Drought Monitor severity, with no insurance assumptions."
       }
     },
     {
       "@type": "Question",
-      "name": "Why do some U.S. counties have such low federal crop insurance coverage?",
+      "name": "How does the Monitor use federal crop-insurance data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Participation varies by crop, region, and producer. Major Corn Belt counties tend to be near-universal on corn and soybean policies. Coverage thins in counties dominated by specialty crops, in regions where premiums are high relative to historical losses, and where private alternatives or self-insurance dominate. The Monitor highlights the counties where that thin coverage meets active drought."
+        "text": "Insurance appears only as per-county context, not as part of the drought ranking. The Monitor shows a county's footprint across federal crop-insurance programs — crop-insurance acres, grazing and forage acres, and rangeland — reported separately and never summed, since a field can carry more than one policy. One caveat matters: much grazing-capable small-grain acreage is insured as forage rather than grain, so a grain-only view understates how much of that ground is actually insured against drought."
       }
     },
     {
@@ -446,14 +446,14 @@ footer .links a:hover { color: var(--accent); }
     <span>U.S. Drought Exposure Monitor</span>
     <span class="live-badge"><span class="live-dot"></span><span id="refresh-text">Live · refreshed weekly</span></span>
   </div>
-  <h1>Which U.S. counties have the lowest crop insurance coverage in drought?</h1>
+  <h1>Which U.S. counties have the most crop acreage in drought?</h1>
   <p class="lede">
     The <strong>U.S. Drought Exposure Monitor</strong> is an interactive 3D county map — each
-    county rises by its planted acres — that answers this every week. Pick a crop, and it overlays
-    federal crop-insurance coverage rates from USDA's Risk Management Agency with current drought
-    severity from the U.S. Drought Monitor and NOAA's 90-day outlook, then scores every U.S. county
-    on where the gap between planted acres and insured acres overlaps with active drought. Free,
-    open-source, public-data only.
+    county rises by its planted acres and is colored by current drought severity — that answers this
+    every week. Pick a crop, and it reads USDA's planted acres against current severity from the
+    U.S. Drought Monitor and NOAA's 90-day outlook to rank every U.S. county by how much planted
+    acreage is under active drought. Federal crop-insurance data rounds out each county as honest
+    context. Free, open-source, public-data only.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
@@ -474,38 +474,45 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>What this tool answers</h2>
   <p>
-    The Monitor combines federal crop-insurance coverage rates, current U.S. Drought
-    Monitor severity, NOAA's 90-day Seasonal Drought Outlook, and county-level planted
-    acres into a single county-by-county view. It answers questions like:
+    The Monitor combines county-level planted acres, current U.S. Drought Monitor
+    severity, and NOAA's 90-day Seasonal Drought Outlook into a single county-by-county
+    view, with federal crop-insurance data as per-county context. It answers questions
+    like:
   </p>
   <ul>
-    <li>Which U.S. counties have the <strong>lowest federal crop insurance coverage</strong> right now, and how many of them are currently in drought?</li>
-    <li>Where is the <strong>coverage gap</strong> — uninsured planted acres — concentrated for corn, soybeans, wheat, cotton, and sorghum?</li>
+    <li>Which U.S. counties have the <strong>most planted acreage under active drought</strong> right now, for corn, soybeans, wheat, cotton, and sorghum?</li>
+    <li>Where is <strong>drought-weighted acreage</strong> — planted acres times severity — concentrated across the country?</li>
     <li>Which counties' growing seasons are forecast to <strong>worsen</strong> under NOAA's 90-day Seasonal Drought Outlook?</li>
     <li>How does <strong>this week's</strong> drought map compare to the same week last year?</li>
   </ul>
 </section>
 
 <section class="prose">
-  <h2>How exposure is calculated</h2>
-  <p>Each county gets one composite score, built in three steps:</p>
+  <h2>How exposure is measured</h2>
+  <p>The headline view rests on two pieces of hard data, with no insurance assumptions:</p>
   <ol>
     <li><strong>Planted acres.</strong> USDA NASS publishes planted acres by county and crop. For the current year, the tool walks a three-tier waterfall — county-level actuals when available, otherwise state-level scaled by the county's three-year share, otherwise the most recent prior year — so every county has a defensible acreage number.</li>
-    <li><strong>Insured acres.</strong> RMA's Summary of Business reports federal crop-insurance policies by county, crop, and coverage type. Dividing insured acres by planted acres yields a <strong>coverage rate</strong>. One minus the coverage rate is the <strong>coverage gap</strong> — the share of planted acres with no federal policy attached.</li>
-    <li><strong>Drought severity.</strong> The U.S. Drought Monitor publishes a five-band severity map every Thursday morning. The tool reads each county's worst current band (D0 through D4) and multiplies it against the coverage gap and planted-acre weight to produce a single county-level <strong>exposure score</strong>.</li>
+    <li><strong>Drought severity.</strong> The U.S. Drought Monitor publishes a five-band severity map every Thursday morning. The tool reads each county's worst current band (D0 through D4) and multiplies it by planted acres to produce <strong>drought-weighted acres</strong> — the acreage in drought's path, scaled by how deep that drought runs.</li>
   </ol>
   <p>
-    The result is a single number per county that captures all three forces at once. The
-    map and watch list rank from highest to lowest exposure, and the scatter view below
-    surfaces the top-right cluster — counties with both thin coverage <em>and</em> deep
-    drought, sized by how many acres are involved.
+    The map and watch list rank counties from highest to lowest drought-weighted acres, so
+    the counties carrying the most planted acreage under the deepest drought rise to the
+    top. A forecast view nudges current severity by NOAA's 90-day Seasonal Drought Outlook
+    to show where conditions are likely to head; a year-over-year view shows where severity
+    has climbed or eased since the same week last year.
+  </p>
+  <p>
+    Federal crop insurance is reported alongside each county as context — not folded into
+    the ranking. The tool shows a county's footprint across federal crop-insurance programs,
+    keeping crop-insurance acres, grazing and forage acres, and rangeland separate, since a
+    single field can carry more than one policy and those acres should not be added together.
   </p>
 </section>
 
 <figure class="screenshot">
   <img src="screenshots/scatter_drought_gap.png?v=3"
-       alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0 to 5, Y-axis is coverage gap 0 to 100 percent. The top-right cluster represents the highest-exposure counties.">
-  <figcaption>Drought severity × coverage gap, sized by planted acres. Top-right is the watch list.</figcaption>
+       alt="Scatter chart with one bubble per county, sized by planted acres and plotted against drought severity 0 to 5. The watch list ranks counties by drought-weighted planted acres.">
+  <figcaption>One bubble per county, sized by planted acres against drought severity. The watch list ranks by drought-weighted acres.</figcaption>
 </figure>
 
 <section class="prose">
@@ -526,8 +533,8 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Drought exposure by crop</h2>
   <p>
-    The Monitor tracks five federally insured U.S. row crops. Each crop has its own
-    geography, its own typical insurance coverage rate, and its own drought-stress
+    The Monitor tracks five major U.S. row crops. Each crop has its own
+    geography, its own planted footprint, and its own drought-stress
     window — so the watch list for one rarely lines up with the watch list for another.
   </p>
   <div class="crop-grid">
@@ -573,7 +580,7 @@ footer .links a:hover { color: var(--accent); }
       </tr>
       <tr>
         <td>USDA RMA Summary of Business</td>
-        <td>Federally insured acres by county, crop, and coverage type</td>
+        <td>Federally insured acres by county and program — crop insurance, grazing and forage, and rangeland, shown separately as per-county context</td>
         <td>Monthly mid-year + crop-year close</td>
       </tr>
       <tr>
@@ -593,16 +600,27 @@ footer .links a:hover { color: var(--accent); }
 <section class="prose">
   <h2>Methodology in plain English</h2>
   <p>
-    Federal crop insurance is the largest farm-safety-net program in the United States,
-    but participation is uneven. Major Corn Belt counties have near-universal participation
-    in corn and soybean policies; specialty-crop counties, mixed-operation regions, and
-    parts of the country with low historical loss ratios often run much thinner. The
-    Monitor highlights the counties where that thin coverage overlaps with active drought.
+    The headline question is simple: where is drought hitting the most planted acreage?
+    The Monitor answers it with two public numbers per county — planted acres and current
+    drought severity — multiplied into a single drought-weighted-acres figure. The map and
+    watch list rank on that figure, so the counties carrying the most crop acreage under
+    the deepest drought come to the top. No insurance assumptions enter the ranking.
   </p>
   <p>
-    The Monitor surfaces those counties by reporting three numbers together — planted
-    acres, coverage gap, and drought severity — instead of one at a time. The full
-    methodology and source are open on
+    Insurance enters only as per-county context, never the ranking — and it is shown
+    carefully, because a crop's grain insurance does not capture the separate programs
+    that insure the same ground against drought. Annual Forage and Pasture, Rangeland and
+    Forage policies cover acres a grain policy does not. Winter wheat grazed by cattle, for
+    instance, is often insured as forage rather than grain. In graze-heavy regions like the
+    Texas High Plains, a county can hold little grain insurance while being heavily covered
+    against drought through forage policies, so a grain-only figure understates how much of
+    that acreage is actually insured.
+  </p>
+  <p>
+    The Monitor shows a county's footprint across all federal crop-insurance programs —
+    crop-insurance acres, grazing and forage acres, and rangeland — reported separately and
+    never summed, since a single field can carry more than one policy. The full methodology and source
+    are open on
     <a href="https://github.com/mcmillinanalytics/drought-exposure-tool" rel="noopener">GitHub</a>.
   </p>
 </section>
@@ -611,24 +629,26 @@ footer .links a:hover { color: var(--accent); }
   <h2>Frequently asked questions</h2>
 
   <details class="faq">
-    <summary>What is "coverage gap" on the map?</summary>
+    <summary>How does the watch list rank counties?</summary>
     <p class="answer">
-      Coverage gap is the share of a county's planted acres that do <em>not</em> have a
-      federal crop-insurance policy attached. It is calculated as 1 − (RMA insured acres
-      ÷ NASS planted acres) for the most recent crop year. A coverage gap of 60% means
-      roughly six out of every ten planted acres in that county had no federal policy on
-      file.
+      The watch list ranks counties by <em>drought-weighted planted acres</em> — each
+      county's planted acreage multiplied by its current U.S. Drought Monitor severity.
+      Counties with both a lot of planted acreage and deep drought rise to the top. The
+      ranking uses hard data only: USDA NASS planted acres and U.S. Drought Monitor
+      severity, with no insurance assumptions.
     </p>
   </details>
 
   <details class="faq">
-    <summary>Why do some U.S. counties have such low federal crop insurance coverage?</summary>
+    <summary>How does the Monitor use federal crop-insurance data?</summary>
     <p class="answer">
-      Participation varies by crop, region, and producer. Major Corn Belt counties tend
-      to be near-universal on corn and soybean policies. Coverage thins in counties
-      dominated by specialty crops, in regions where premiums are high relative to
-      historical losses, and where private alternatives or self-insurance dominate. The
-      Monitor highlights the counties where that thin coverage meets active drought.
+      Insurance appears only as per-county context, not as part of the drought ranking.
+      The Monitor shows a county's footprint across federal crop-insurance programs —
+      crop-insurance acres, grazing and forage acres, and rangeland — reported separately
+      and never summed, since a field can carry more than one policy. One caveat matters:
+      much grazing-capable small-grain acreage is insured as forage rather than grain, so a
+      grain-only view understates how much of that ground is actually insured against
+      drought.
     </p>
   </details>
 
@@ -674,8 +694,8 @@ footer .links a:hover { color: var(--accent); }
 <aside class="final-cta">
   <h2>Open the live tool</h2>
   <p>
-    Pick a crop, pick a state, and the watch list reorders to show which counties are
-    most exposed this week.
+    Pick a crop, pick a state, and the watch list reorders to show which counties have the
+    most planted acreage under active drought this week.
   </p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">

@@ -51,7 +51,7 @@
   "url": "https://drought.mcmillinanalytics.com",
   "applicationCategory": "DataVisualization",
   "operatingSystem": "Any (web browser)",
-  "description": "County-level dashboard combining USDA NASS planted acres, RMA Summary of Business insured acres, the U.S. Drought Monitor, and NOAA's CPC seasonal outlook to surface where federal crop-insurance coverage is thin in counties currently in drought.",
+  "description": "County-level dashboard combining USDA NASS planted acres, the U.S. Drought Monitor, and NOAA's CPC seasonal outlook to show which counties have the most planted acreage under active drought, with federal crop-insurance data shown as per-county context.",
   "creator": {
     "@type": "Person",
     "name": "John McMillin",
@@ -408,15 +408,17 @@ footer .links a:hover { color: var(--accent); }
     </div>
     <div class="source-pills" aria-label="Data sources">
       <span class="source-pill">USDA NASS</span>
-      <span class="source-pill">RMA SoB</span>
+      <span class="source-pill">USDA RMA</span>
       <span class="source-pill">U.S. Drought Monitor</span>
       <span class="source-pill">NOAA CPC</span>
     </div>
     <p>
-      A county-level, 3D view of where drought meets federal crop-insurance
-      coverage across U.S. row crops — each county rises by its planted acres.
-      Combines USDA NASS, RMA, the U.S. Drought Monitor, and NOAA's CPC outlook
-      into one map and watch list. Refreshes weekly.
+      A county-level, 3D view of where active drought meets the most planted
+      acreage across U.S. row crops — each county rises by its planted acres
+      and is colored by current drought severity. Combines USDA NASS planted
+      acres, the U.S. Drought Monitor, and NOAA's CPC outlook into one map and
+      watch list, with federal crop-insurance data as per-county context.
+      Refreshes weekly.
     </p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://drought.mcmillinanalytics.com" rel="noopener">
@@ -433,8 +435,8 @@ footer .links a:hover { color: var(--accent); }
     </figure>
     <figure>
       <img src="screenshots/scatter_drought_gap.png?v=3"
-           alt="Scatter chart with one bubble per county, sized by planted acres. X-axis is drought severity 0–5, Y-axis is coverage gap 0–100%. Top-right cluster is the watch list.">
-      <figcaption>Drought severity × coverage gap, sized by planted acres — top-right is the watch list.</figcaption>
+           alt="Scatter chart with one bubble per county, sized by planted acres and plotted against drought severity 0–5. The watch list ranks counties by drought-weighted planted acres.">
+      <figcaption>The watch list ranks counties by drought-weighted planted acres — drought severity times the acreage in its path.</figcaption>
     </figure>
     <figure>
       <img src="screenshots/map_drought_overtime.png?v=2"
